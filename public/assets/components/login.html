@@ -1,0 +1,77 @@
+<!-- Carousel -->
+      <div id="carousel-bis-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-bis-generic" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-bis-generic" data-slide-to="1"></li>
+          <li data-target="#carousel-bis-generic" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Overlay -->
+          <div id="slideshow-overlay"></div>
+
+          <!-- Logo -->
+          <img class="logo img-responsive" src="assets/img/paragala-logo.png" alt="Paragala Logo"/>
+          
+          <!-- Login -->
+          <form class="form-bis-generic" role="form text-center">
+            <div class="form-group form-group-lg">
+              <input type="text" class="form-control" id="student-num" placeholder="Enter Student No.">
+            </div>
+            <button type="button" class="btn btn-default submit-btn btn-md"  data-toggle="modal" data-target="#myModal">LOGIN</button>
+          </form>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+
+          <!-- Image -->
+          <div class="item active">
+            <img class="img-responsive" src="assets/img/sample/1.jpg" alt="...">
+          </div>
+          <div class="item">
+            <img class="img-responsive" src="assets/img/sample/2.jpg" alt="..."> 
+          </div>
+          <div class="item">
+            <img class="img-responsive" src="assets/img/sample/3.jpg" alt="..."> 
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <!-- <a class="left carousel-control" href="#carousel-bis-generic" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-bis-generic" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a> -->
+      </div>
+    
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <h3 class="modal-title" id="myModalLabel">Warning!</h3>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-xs-9">
+                  <ul>
+                    <h3>Invalid input!</h3>
+                    <li>You're still not currently registered!</li>
+                    <li>Incorrect Student Number!</li>
+                    <li>You're already done!</li>
+                  </ul>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <img class="img-responsive" src="assets/img/mad-no-smiley-emoticon.gif" alt="">
+                </div>
+              </div>
+              <h4 class="text-center">Please contact your administrator for more info.</h4>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">TRY AGAIN</button>
+            </div>
+          </div>
+        </div>
+      </div>
