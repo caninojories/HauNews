@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	
+
 	function contactUs(){
 		var $firstName = $('.contact .firstName').val();
 		var $lastName = $('.contact .lastName').val();
@@ -14,14 +14,17 @@ $(document).ready(function(){
 			$('.contact').prepend('<div class="alert alert-danger alert-dismissible alert-contact animated bounceInRight" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Oops!</strong> Firstname should be minimum of two characters.</div>');
 			$('.btn-contact').prop('disabled', false).html('Submit');
 			$('.fnameMin').removeClass('hidden');
+			$('.contact .firstName').focus();
 		}else if($lastName.length < 2 ){
 			$('.contact').prepend('<div class="alert alert-danger alert-dismissible alert-contact animated bounceInRight" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Oops!</strong> Lastname should be minimum of two characters.</div>');
 			$('.btn-contact').prop('disabled', false).html('Submit');
 			$('.lnameMin').removeClass('hidden');
+			$('.contact .lastName').focus();
 		}else if(!filter.test($email)){
 			$('.contact').prepend('<div class="alert alert-danger alert-dismissible alert-contact animated bounceInRight" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Oops!</strong> Please check your email address.</div>');
 			$('.btn-contact').prop('disabled', false).html('Submit');
 			$('.email-warning').removeClass('hidden');
+			$('.contact .email').focus();
 		}else{
 			$.ajax({
 				url: 'https://hau-rappler.herokuapp.com/api/contactus',
@@ -87,6 +90,6 @@ $(document).ready(function(){
 		method: 'GET'
 	}).success( function(response){
 		console.log(response);
-	}); 
+	});
 
 });

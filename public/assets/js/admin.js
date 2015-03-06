@@ -84,10 +84,10 @@ $(document).ready(function(){
                             $post += '<td><button class="btn btn-sm btn-warning edit-posted-news">edit <i class="fa fa-gavel"></button></td>';
                             $post += '<td hidden><input type="text" value="'+ response[news]._id +'"/></td></tr>';
 
-                        } 
+                        }
                         $post += '</tbody>';
                         $post += '</table>';
-                        
+
                         $(".news-tab>.news-tab-content").eq($index).find('#dataNews').append($post);
 
                         //View content
@@ -215,7 +215,7 @@ $(document).ready(function(){
                     $comments += '</table>';
                 $(".comments-approval").append($comments);
 
-                
+
                 $(document).on('click', '.status-comments', function(){
                   var $status;
                   var $id = $(this).parent('td').siblings('td').children('input').val();
@@ -318,7 +318,7 @@ $(document).ready(function(){
                                     method: "PUT",
                                     data: {id: $id, status:$status}
                                 }).success( function(response){
-                                }); 
+                                });
                             });
 
                           //View content/image
@@ -367,7 +367,7 @@ $(document).ready(function(){
                   }
               });
           });
-          
+
 
         } //End of master admin
 
@@ -456,7 +456,7 @@ $(document).ready(function(){
             $('input').val('');
             $('.textarea').val('');
             $('.success-process').fadeIn('fast').delay(3001).fadeOut('slow');
-          });  
+          });
         }
     }
 
@@ -476,7 +476,7 @@ $(document).ready(function(){
 
     });
 
-//=================== Tyeahead ===========================// 
+//=================== Tyeahead ===========================//
 $.ajax({
   url: 'https://hau-rappler.herokuapp.com/api/userInfo',
   method: 'GET',
@@ -553,7 +553,7 @@ $('.typeahead').typeahead(null, {
           postId: response.id,
           title: response.title,
           content: response.content
-        }); 
+        });
 
         $('ul.headline>li').html(objHeadline[0].title);
         $('.btn-headline').on('click', function(){
@@ -582,8 +582,8 @@ $('.typeahead').typeahead(null, {
 
 
       for( var obj in objTopten ){
-        var topTen = '<li><i class="fa fa-arrow-circle-right"></i> '+objTopten[obj].title+'</li>';  
-      } 
+        var topTen = '<li><i class="fa fa-arrow-circle-right"></i> '+objTopten[obj].title+'</li>';
+      }
 
       $('.topTen').append(topTen);
     }
@@ -603,7 +603,7 @@ $('.typeahead').typeahead(null, {
 
     $('.slidesTitle').append(slidesTitle);
   }
-    
+
   }); //end of typeahead
 
 
@@ -730,7 +730,7 @@ $('.typeahead').typeahead(null, {
         $.ajax({
           url: 'https://hau-rappler.herokuapp.com/api/post/carousel',
           method: 'POST',
-          data: {data: slidesObj, department: departmentData} 
+          data: {data: slidesObj, department: departmentData}
           // contentType: 'application/json',
         }).success( function(response){
         });
@@ -784,17 +784,17 @@ $('.typeahead').typeahead(null, {
             $('input').val('');
             $('.textarea').val('');
             $('.success-process').fadeIn('fast').delay(3001).fadeOut('slow');
-          });  
+          });
         }
     }
-    
+
     $('#editPost .btn-save-changes').on('click', function(){
       uploadFilePUT();
     });
 
 
 
-  // ===========================About Us=============================
+  // ===========================About Us Content=============================
   $('.btn-aboutUs').on('click', function(){
     var $tag = $('.aboutUs-post #aboutUs-tag').val();
     var $aboutTitle = $('.aboutUs-post #aboutUs-title').val();
@@ -815,12 +815,34 @@ $('.typeahead').typeahead(null, {
 
   });
 
+  // ===========================Contact Us content=============================
+    $('.btn-contactUs').on('click', function(){
+    var $st = $('.contactUs-post #contactUs-street').val();
+    var $brgy = $('.contactUs-post #contactUs-brgy').val();
+    var $city = $('.contactUs-post #contactUs-city').val();
+    var $prov = $('.contactUs-post #contactUs-prov').val();
+    var $contact = $('.contactUs-post #contactUs-contac').val();
+    var $content = $('.contactUs-post #contactUs-content').val();
+
+    
+    $.ajax({
+        url: "https://hau-rappler.herokuapp.com/api/contact",
+        method: "POST",
+        data: {street: $st, barangay:$brgy, city:$city, province:$prov, contact:$contact, content:$content}
+    }).success( function(response){
+      console.log(response);
+      $('.contactUs-post input').val('');
+      $('.contactUs-post .textarea').val('');
+      $('.aboutUs-post .success-process').fadeIn('fast').delay(3001).fadeOut('slow');
+    }).error( function(response){
+      $('.contactUs-post .error-process').fadeIn('fast').delay(3001).fadeOut('slow');
+    });
+
+  });
+
 
 
 });
 
 
 // ==========================================================================
-
-   
-
