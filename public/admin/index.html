@@ -3,24 +3,28 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
- 	<link rel="shortcut icon" href="../assets/img/Angelite[1].png">
+ 	<link rel="shortcut icon" href="/assets/img/Angelite[1].png">
 	<title>Angelite Administrator</title>
-	<link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
- 	<link rel="stylesheet" type="text/css" href="../assets/css/font-awesome-4.3.0/css/font-awesome.min.css">
- 	<!-- <link rel="stylesheet" href="assets/css/animate.css"> -->
- 	<link rel="stylesheet" type="text/css" href="../assets/css/main-admin.css">
- 	<script src="../assets/js/modernizr.js"></script><style type="text/css"></style>
- 	<!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-wysihtml5.css">
+ 	<link rel="stylesheet" type="text/css" href="/assets/css/font-awesome-4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/assets/css/animate.css">
+ 	<link rel="stylesheet" href="/assets/css/nprogress.css">
+ 	<link rel="stylesheet" type="text/css" href="/assets/css/main-admin.css">
+  <!-- <link rel="stylesheet" href="/assets/css/main.css"> 
+ 	 <script src="/assets/js/modernizr.js"></script>-->
+   <!--[if IE]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 </head>
 <body>
-	<div id="wrapper" class="">
+	<div id="wrapper" class="active">
 		<!-- Header -->
-		<div class="admin-header">
+		<div class="admin-header clearfix">
 			<div class="admin-inner">
-        <span class="text-success admin-logo">Angelite Admin</span>
-				<span class="text-danger pull-right admin-logout"><i class="fa fa-power-off fa-2x"></i></span>
+        <span class="text-danger admin-logo">Angelite Admin</span>
+        <span class="text-danger pull-right admin-logout"><i class="fa fa-power-off fa-2x"></i></span>
+				<span class="text-danger pull-right admin-logout"><a href="/"><i class="fa fa-home fa-2x"></a></i></span>
 			</div>
 		</div>
 
@@ -32,9 +36,10 @@
       <ul class="sidebar-nav" id="sidebar">     
         <li class="active"><a href="#">Dashboard<span class="sub_icon glyphicon glyphicon-home"></span></a></li>
         <li class=""><a href="#">Admins<span class="sub_icon glyphicon glyphicon-user"></span></a></li>
-        <li class=""><a href="#">Post<span class="sub_icon glyphicon glyphicon-file"></span></a></li>
-        <li class=""><a href="#">Create News<span class="sub_icon fa fa-sign-in"></span></a></li>
-        <li class=""><a href="#">Help<span class="sub_icon fa fa-question-circle"></span></a></li>
+        <li class=""><a href="#">Posted News<span class="sub_icon fa fa-newspaper-o"></span></a></li>
+        <li class=""><a href="#">Comments<span class="sub_icon fa fa-sign-in"></span></a></li>
+        <li class="headline-tab"><a href="#">Headlines<span class="sub_icon fa fa-file-o"></span></a></li>
+        <li class=""><a href="#">Create News<span class="sub_icon fa fa-file"></span></a></li>
       </ul>
     </div>
         
@@ -48,53 +53,255 @@
             <div class="news-tab">
               <!-- Dashboard -->
             	<div class="news-tab-content active">
-            		<p class="well lead text-success">Welcome to administor content!</p>
+            		<div class="alert alert-success alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Hello</strong> Welcome to admin panel.
+                </div>
+                <div class="col-sm-12">
+                  <!-- About us -->
+                  <div class="panel">
+                    <div class="panel-heading"><h4>Manage About Us</h4></div>
+                    <div class="panel-body">
+                      <div class="aboutUs-post">
+                        <div class="alert alert-success alert-dismissible success-process aboutUs-alert" style="display:none;" role="alert">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <strong>Success!</strong>
+                        </div>
+                        <div class="alert alert-danger alert-dismissible error-process" style="display:none;" role="alert">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <strong>Error!</strong>
+                        </div>
+                        <div class="form-group">
+                          <label for="aboutUs-tag">Tag</label>
+                          <input type="text" class="form-control" id="aboutUs-tag" placeholder="ex. ABOUT US">
+                        </div>
+                        <div class="form-group">
+                          <label for="aboutUs-title">Title</label>
+                          <input type="text" class="form-control" id="aboutUs-title" placeholder="Enter Title">
+                        </div>
+                        <div class="form-group">
+                          <label for="aboutUs-content">About Us Content</label>
+                          <textarea type="text" class="form-control textarea" id="aboutUs-content" placeholder="About us content" rows="10"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-aboutUs">Submit</button>
+                      </div> <!-- //aboutUs -->
+                    </div>
+                  </div> <!-- //end of panel -->
+
+                  <!-- Contact Us -->
+                  <div class="panel">
+                    <div class="panel-heading"><h4>Manage Contac Us Content</h4></div>
+                    <div class="panel-body">
+                      <div class="contactUs-post">
+                        <div class="alert alert-success alert-dismissible success-process contactUs-alert" style="display:none;" role="alert">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <strong>Success!</strong>
+                        </div>
+                        <div class="alert alert-danger alert-dismissible error-process" style="display:none;" role="alert">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <strong>Error!</strong>
+                        </div>
+                        <div class="form-group">
+                          <label for="contactUs-street">Street</label>
+                          <input type="text" class="form-control" id="aboutUs-street" placeholder="Street">
+                        </div>
+                        <div class="form-group">
+                          <label for="contactUs-tag">Barangay</label>
+                          <input type="text" class="form-control" id="aboutUs-brgy" placeholder="Barangay">
+                        </div>
+                        <div class="form-group">
+                          <label for="contactUs-city">City</label>
+                          <input type="text" class="form-control" id="aboutUs-city" placeholder="City">
+                        </div>
+                        <div class="form-group">
+                          <label for="contactUs-contact">Contact</label>
+                          <input type="text" class="form-control" id="aboutUs-title" placeholder="Contact">
+                        </div>
+                        <div class="form-group">
+                          <label for="contactUs-content">Content</label>
+                          <textarea type="text" class="form-control textarea" id="aboutUs-content" placeholder="About us content" rows="10"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-contactUs-content">Submit</button>
+                      </div> <!-- //aboutUs -->
+                    </div>
+                  </div> <!-- //end of panel -->
+
+                </div>
             	</div>
                 
               <!-- List of admin -->
             	<div class="news-tab-content">
-                    <div class="data">
-                        
-                    </div>   
-                </div>
+                <div class="panel">
+                  <div class="panel-heading">
+                    <h4>Registered users</h4>
+                  </div>
+                  <div class="data"></div>
+                </div>   
+              </div> <!-- //end of data -->
 
               <!-- post -->
             	<div class="news-tab-content">
-                <div id="dataNews"></div>
-                <button class="btn btn-primary">see more...</button>
+                <div class="panel">
+                  <div class="panel-heading">
+                    <h4>Posted News 
+                      <!-- <div class="col-xs-3 pull-right">
+                      <input type="text" class="form-control" placeholder="search..." >
+                      </div> -->
+                    </h4>
+                  </div>
+                  <div id="dataNews"></div>
+                </div>
+              </div> <!-- //end of post -->
+
+              <!-- Comments -->
+              <div class="news-tab-content">
+                <div class="panel">
+                  <div class="panel-heading"><h4>Comments</h4></div>
+                  <div class="comments-approval"></div> <!-- end of comments -->
+                </div>
+                
               </div>
+              
+              <!-- Headline/Top News/Caraousel -->
+              <div class="news-tab-content">
+                <div class="headlines">
+                  <div class="panel with-nav-tabs panel-info">
+                    <div class="panel-heading">
+                      <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab1info" data-toggle="tab">Headine</a></li>
+                        <li><a href="#tab2info" data-toggle="tab">Top 10 News</a></li>
+                        <li><a href="#tab3info" data-toggle="tab">Slideshow News</a></li>
+                      </ul>
+                    </div>
+                    <div class="panel-body">
+                      <input class="typeahead">
+                      <br>
+                      <div class="tab-content">
+                        
+                        <div class="tab-pane fade in active" id="tab1info">
+                         <ul class="headline">
+                           <li></li>
+                         </ul>
+                         <button class="btn btn-success btn-headline">Submit</button>
+                         <button class="btn btn-danger delete-headline">Delete</button>
+                        </div>
+
+                        <div class="tab-pane fade" id="tab2info">
+                          <div class="topTen">
+                            
+                          </div>
+                          <button class="btn btn-success btn-topTen">Submit</button>
+                          <button class="btn btn-danger delete-top-ten">Delete</button>
+                        </div>
+
+                        <div class="tab-pane fade" id="tab3info">
+                          <div class="slidesTitle">
+                          </div>
+                          <button class="btn btn-success btn-slides">Submit</button>
+                          <button class="btn btn-danger delete-carousel">Delete</button>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+              </div>
+              <!-- Headline/Top News/Caraousel -->
 
               <!-- Create news -->
             	<div class="news-tab-content">
-                <div class="createNews">
-                  <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" placeholder="Enter Title">
+                <div class="panel">
+                  <div class="panel-heading"><h4>Create News</h4></div>
+                  <div class="panel-body">
+                    <div class="createNews">
+                      <div class="alert alert-success alert-dismissible success-process" style="display:none;" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Success!</strong> Your article has been successfully posted.
+                      </div>
+                      <div class="alert alert-danger alert-dismissible error-process" style="display:none;" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Error!</strong> Your article was not successfully posted.
+                      </div>
+                      <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" placeholder="Enter Title">
+                      </div>
+                      <div class="form-group">
+                        <label for="content">Article content</label>
+                        <textarea type="text" class="form-control textarea" id="content" placeholder="Article content" rows="10"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="image">Image File</label>
+                        <input type="file" id="file" name="image">
+                        <p class="help-block">Pleas choose a image type of jpeg, jpg and png.</p>
+                      </div>
+                      <input type="submit" class="btn btn-primary create-news" value="Submit">
+                    </div> <!-- //createNews -->
                   </div>
-                  <div class="form-group">
-                    <label for="content">Article content</label>
-                    <textarea type="text" class="form-control" id="content" placeholder="Article content" rows="10"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="image">Image File</label>
-                    <input type="file" id="file" name="photo">
-                    <p class="help-block">Pleas choose a image type of jpeg, jpg and png.</p>
-                  </div>
-                  <input type="submit" class="btn btn-primary create-news" value="Submit">
-                </div> <!-- //createNews -->
+                </div>
+                
               </div> <!-- //end of create news -->
 
-            	<div class="news-tab-content">5</div>
             </div> <!-- end of news tab -->
           </div>
         </div>
       </div>
     </div>
+
+    <div id="viewContentModal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Modal title</h4>
+          </div>
+          <div class="modal-body">
+            <img class="modal-img-news img-responsive" src="" />
+            <br>
+            <p class="modal-content-news"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div id="editPost" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Modal title</h4>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" value="" class="edit-id">
+            <input type="hidden" value="" class="edit-image">
+            <div class="form-group">
+              <input type="text" class="form-control edit-title" placeholder="Title">
+            </div>
+            <textarea type="text" class="form-control edit-content" rows="10"></textarea>
+            <div class="form-group">
+              <label for="image">Image File</label>
+              <input type="file" id="editFile" name="photo" />
+              <p class="help-block">Pleas choose a image type of jpeg, jpg and png.</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary btn-save-changes" data-dismiss="modal">Save Changes</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
     
   </div> <!-- end of wrapper -->
 
-	<script src="../assets/js/jquery.js"></script>
-	<script src="../assets/js/bootstrap.js"></script>
-	<script src="../assets/js/main-admin.js"></script>
+  <script src="/assets/js/wysihtml5.js"></script>
+  <script src="/assets/js/jquery.js"></script>
+	<script src="/assets/js/nprogress.js"></script>
+  <script src="/assets/js/bootstrap.min.js"></script>
+  <script src="/assets/js/bootstrap-wysihtml5.js"></script>
+  <script src="/assets/js/typeahead.js"></script>
+	<script src="/assets/js/admin.js"></script>
 
 </body></html>

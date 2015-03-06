@@ -4,11 +4,12 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
- 	<link rel="shortcut icon" href="assets/img/logo.png">
+ 	<link rel="shortcut icon" href="/assets/img/Angelite[1].png">
 	<title>The Angelite</title>
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
  	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome-4.3.0/css/font-awesome.min.css">
  	<link rel="stylesheet" href="assets/css/animate.css">
+ 	<link rel="stylesheet" href="assets/css/nprogress.css">
  	<link rel="stylesheet" type="text/css" href="assets/css/main.css">
  	<script src="assets/js/modernizr.js" ></script>
  	<!--[if IE]>
@@ -16,52 +17,51 @@
 	<![endif]-->
 </head>
 <body>
-	<header class="header">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-xs-12">
-					<h1 class="text-center"> Are you ready for the next BIG thing Angelites?! </h1>
-				</div>
-			</div>
-		</div>
-	</header>
-	<nav class="navbar navbar-inverse" role="navigation">
-		<div class="container-fluid">
-		  <div class="navbar-header">
-	      <button type="button" class="navbar-toggle pull-left beast-button" data-toggle="collapse" data-target="#navigation">
-	         <span class="sr-only">Toggle navigation</span>
-	         <span class="icon-bar"></span>
-	         <span class="icon-bar"></span>
-	         <span class="icon-bar"></span>
-	      </button>
-	      <a class="navbar-brand" data-hover="THE ANGELITE" href="index.html">
-	      	<img src="assets/img/the_angelite_latest[1].png" alt="">
-	      </a>
-		  </div>
-		  <div class="collapse navbar-collapse" id="navigation">
-	      <ul class="nav navbar-nav">
-	        <li><a href="index.html" data-hover="Home">Home</a></li>
-	        <li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="Publications">
-	              Publications <b class="caret"></b>
-	          </a>
-	          <ul class="dropdown-menu">
-	            <li><a href="cict.html">Access Point</a></li>
-	            <li><a href="cea.html">The Solution</a></li>
-	            <li><a href="chm.html">The Concierge</a></li>
-	            <li><a href="cba.html">The Enterprise</a></li>
-	            <li><a href="cnams.html">The Lifeline</a></li>
-	            <li><a href="cased.html">Nexus</a></li>
-	            <li><a href="hs.html">The Angelian</a></li>
-	          </ul>
-	        </li>
-	        <li><a href="contact-us.html" data-hover="Contact Us">Contact Us</a></li>
-	        <li><a href="about-us.html" data-hover="About Us">About Us</a></li>
-	        <li><a href="#" data-hover="Help">Help</a></li>
-	      </ul>
-		  </div> <!-- //End of collapse -->
-		</div> <!-- //End of container-fluid -->
-	</nav> <!-- /navbar -->
+	<div class="angelite-wrapper">
+		<nav class="navbar navbar-inverse" role="navigation">
+			<div class="container-fluid">
+			  <div class="navbar-header">
+		      <button type="button" class="navbar-toggle pull-left beast-button" data-toggle="collapse" data-target="#navigation">
+		         <span class="sr-only">Toggle navigation</span>
+		         <span class="icon-bar"></span>
+		         <span class="icon-bar"></span>
+		         <span class="icon-bar"></span>
+		      </button>
+		      <a class="navbar-brand" data-hover="THE ANGELITE" href="/">
+		      	<img src="/assets/img/the_angelite_latest[1].png" alt="">
+		      </a>
+			  </div>
+			  <div class="collapse navbar-collapse" id="navigation">
+		      <ul class="nav navbar-nav">
+		        <li><a href="/" data-hover="Home">Home</a></li>
+		        <li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="Publications">
+		              Publications <b class="caret"></b>
+		          </a>
+		          <ul class="dropdown-menu">
+		            <li><a href="/cict">The Access Point</a></li>
+		            <li><a href="/cea">The Solution</a></li>
+		            <li><a href="/chm">The Concierge</a></li>
+		            <li><a href="/cba">The Enterprise</a></li>
+		            <li><a href="/cnams">The Lifeline</a></li>
+		            <li><a href="/cased">The Nexus</a></li>
+		            <li><a href="/highschool">The Angelian</a></li>
+		          </ul>
+		        </li>
+		        <li><a href="/contact-us.html" data-hover="Contact Us">Contact Us</a></li>
+		        <li><a href="/about-us.html" data-hover="About Us">About Us</a></li>
+		      </ul>
+		      <ul class="nav navbar-nav navbar-right">
+		      	<li class="displayed-username"><a><span class="display-username"></span></a></li>
+		      	<li class="admin-link"><a href="/admin"><span class="display-panel"><i class="fa fa-cog fa-lg"></i></span></a></li>
+		      	<li class="login"><a href="/login/">Login</a></li>
+		      	<li class="logout"><a href="/"><i class="fa fa-power-off"></i></a></li>
+		      </ul>
+			  </div> <!-- //End of collapse -->
+			</div> <!-- //End of container-fluid -->
+		</nav> <!-- /navbar -->
+	</div> <!-- /end of angelite-wrapper -->
+	
 	<div id="beast-nav"></div>
 	
 	
@@ -69,46 +69,48 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="heading-news">
-				<div class="col-sm-12 col-md-6 col-lg-6">
+				<div class="col-sm-12 col-md-6 col-lg-6 contact-us-form">
 					<div class="subscribe">
 						<div class="panel panel-default">
 						  <div class="panel-heading">
-						    <h3 class="panel-title text-center">Get in Touch to get the Ball rolling.. </h3>
+						    <h3 class="panel-title text-center">Contact Us Now! </h3>
 						  </div>
 						  <div class="panel-body">
-						    <form role="form">
+						    <form role="form" class="contact">
 								  <div class="form-group">
 								    <label for="fname">First name</label>
-								    <input type="text" class="form-control" id="fname" placeholder="Enter First name">
+								    <input type="text" class="form-control firstName" id="fname" placeholder="Enter First name" required>
+								    <small class="text-danger fnameMin hidden">Minimum of 2 characters</small>
 								  </div>
 
 								  <div class="form-group">
 								    <label for="lname">Last name</label>
-								    <input type="text" class="form-control" id="lname" placeholder="Enter Last Name">
+								    <input type="text" class="form-control lastName" id="lname" placeholder="Enter Last Name" required>
+								    <small class="text-danger lnameMin hidden">Minimum of 2 characters</small>
 								  </div>
 
 								  <div class="form-group">
 								    <label for="email">Email address</label>
-								    <input type="email" class="form-control" id="email" placeholder="Enter email">
+								    <input type="email" class="form-control email" id="email" placeholder="Enter email" required>
+								    <small class="text-danger email-warning hidden">Invalid email address</small>
 								  </div>
 
 								  <div class="form-group">
 								    <label for="lname">Subject</label>
-								    <input type="text" class="form-control" id="lname" placeholder="Enter Subject">
+								    <input type="text" class="form-control subject" id="lname" placeholder="Enter Subject" required>
 								  </div>
 
 								  <div class="form-group">
-								    <textarea type="text" class="form-control" rows="8" placeholder="Message"></textarea>
+								    <textarea type="text" class="form-control message" rows="8" placeholder="Message" required></textarea>
 								  </div>
 
-
-								  <button type="submit" class="btn">Submit</button>
+								  <button type="button" class="btn btn-btn btn-contact">Submit</button>
 								</form>
 						  </div>
 						</div> <!-- //end of panel -->
 					</div>
 				</div> <!-- //end of column 1 -->
-				<div class="col-md-6 col-lg-6">
+				<div class="col-sm-12 col-md-6 col-lg-6">
 					<div class="jumbotron">
 						<div id="indicatorBox">
 				  		<p class="text-center">CONTACT</p>
@@ -185,8 +187,10 @@
   -->
 
 	<script src="assets/js/jquery.js"></script>
+	<script src="assets/js/nprogress.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/jquery.fittext.js"></script>
+	<script src="assets/js/contact.js"></script>
 	<script src="assets/js/main.js"></script>
 </body>
 </html>
