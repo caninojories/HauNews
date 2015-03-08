@@ -5,10 +5,15 @@ $(document).ready(function(){
 $.ajax({
 		url: "https://hau-rappler.herokuapp.com/api/post/department",
 		method:"GET",
-		data:{department: $department}	
+		data:{department: $department}
 	}).success( function(response){
 		var dNews = '<div class="row">';
- 			for(var departmentNews in response){
+			dNews += '<div class="col-xs-12">';
+			dNews += '<hr>';
+			dNews += '<h4 class="text-danger">Recent News</h4>';
+			dNews += '<hr>';
+			dNews += '</div>';
+	 			for(var departmentNews in response){
  			if(response[departmentNews].status != 'pending'){
 			dNews += '<div class="col-xs-12 col-sm-6 col-md-4"><br>';
 			dNews += '<div class="panel panel-default angelite-panel">';
@@ -93,6 +98,7 @@ $.ajax({
     data: {department: $department}
   }).success( function(response){
     if(response[0]){
+			$('#myCarouselDep').fadeIn().addClass('animated fadeIn');
       var i = 0;
     	var e = 0;
       var $slideCarousel;
@@ -125,10 +131,10 @@ $.ajax({
         }
       }
 
-      $('.carousel-inner').html($slideCarousel);
-      $('#myCarousel').append(counter);
+      $('#myCarouselDep').append($slideCarousel);
+      $('#myCarouselDep').append(counter);
     }else{
-      $('#myCarousel').remove();
+      $('#myCarouselDep').remove();
     }
 
   });

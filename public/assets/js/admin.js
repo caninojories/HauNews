@@ -81,7 +81,7 @@ $(document).ready(function(){
                             $post += '<td class="news-title">' + response[news].title + '</td>';
                             $post += '<td><button class="btn btn-sm btn-info view-content">view content <i class="fa fa-search-plus"></i></button><p class="news-content" hidden>'+ response[news].content +'</p><img class="img-responsive news-img hidden" src="'+ response[news].imagePath +'" /> </td>';
                             $post += '<td>' + response[news].status + '</td>'
-                            $post += '<td><button class="btn btn-sm btn-warning edit-posted-news">edit <i class="fa fa-gavel"></button></td>';
+                            $post += '<td><button class="btn btn-sm btn-warning edit-posted-news">edit <i class="fa fa-gavel"></i></button></td>';
                             $post += '<td hidden><input type="text" value="'+ response[news]._id +'"/></td></tr>';
 
                         }
@@ -158,19 +158,19 @@ $(document).ready(function(){
                   $html += '<option value="">admin</option>';
                   $html += '<option value="">student</option></select></td>';
                   $html += '<td class="edit-access"><button class="btn btn-primary edit-btn btn-sm">Edit <i class="fa fa-gavel"></i></button></td>';
-                  $html += '<td><button class="btn btn-danger btn-sm delete">Delete <i class="fa fa-trash-o"></button></td></tr>';
+                  $html += '<td><button class="btn btn-danger btn-sm delete">Delete <i class="fa fa-trash-o"></i></button></td></tr>';
                 } else if(response[obj]._id === $userInfo.data._id){
                   $html += '<td class="select-access"><select class="form-control input-sm" disabled><option selected>' + response[obj].accessType + '</option>';
                   $html += '<option value="">admin</option>';
                   $html += '<option value="">student</option></select></td>';
                   $html += '<td class="edit-access"><button class="btn btn-primary btn-sm">Edit <i class="fa fa-gavel"></i></button></td>';
-                  $html += '<td><button class="btn btn-danger btn-sm delete">Delete <i class="fa fa-trash-o"></button></td></tr>';
+                  $html += '<td><button class="btn btn-danger btn-sm delete">Delete <i class="fa fa-trash-o"></i></button></td></tr>';
                 } else {
                   $html += '<td class="select-access"><select class="form-control input-sm" disabled><option selected>' + response[obj].accessType + '</option>';
                   $html += '<option value="">admin</option>';
                   $html += '<option value="">student</option></select></td>';
                   $html += '<td class="edit-access"><button class="btn btn-primary btn-sm" disabled>Edit <i class="fa fa-gavel"></i></button></td>';
-                  $html += '<td><button class="btn btn-danger btn-sm delete" disabled>Delete <i class="fa fa-trash-o"></button></td></tr>';
+                  $html += '<td><button class="btn btn-danger btn-sm delete" disabled>Delete <i class="fa fa-trash-o"></i></button></td></tr>';
                 }
               }
                   $html += '</tbody>';
@@ -208,7 +208,7 @@ $(document).ready(function(){
                   } else {
                     $comments += '<td><button class="btn status-comments btn-success btn-sm">' + response[comment].status + '</button></td>';
                   }
-                    $comments += '<td><button class="btn btn-sm btn-danger btn-delete-comment">Delete <i class="fa fa-trash-o"></button></td>';
+                    $comments += '<td><button class="btn btn-sm btn-danger btn-delete-comment">Delete <i class="fa fa-trash-o"></i></button></td>';
                     $comments += '<td hidden><input type="text" value="'+ response[comment]._id +'"/></td></tr>';
                     }
                     $comments += '</tbody>';
@@ -239,15 +239,24 @@ $(document).ready(function(){
                   });
 
                  $(document).on('click', '.btn-delete-comment', function(){
+                  $(this).prop('disabled', true).html('deleting...');
                   var $id = $(this).parent('td').siblings('td').children('input').val();
-                  $(this).parent('td').parent('tr').remove();
-                  $.ajax({
-                    url: 'https://hau-rappler.herokuapp.com/api/post/comment',
-                    method: 'DELETE',
-                    data:{id:$id}
-                  }).success( function(response){
-                    console.log(response);
-                  });
+                  var confirmDelete = confirm('Are your sure you want to delete?');
+                  if(confirmDelete === true){
+                    $(this).parent('td').parent('tr').remove();
+                    $.ajax({
+                      url: 'https://hau-rappler.herokuapp.com/api/post/comment',
+                      method: 'DELETE',
+                      data:{id:$id}
+                    }).success( function(response){
+                      $(this).prop('disabled', false).html('Delete <i class="fa fa-trash-o"</i>');
+                      console.log(response);
+                    }).error( function(){
+                      $(this).prop('disabled', false).html('Delete <i class="fa fa-trash-o"</i>');
+                    });
+                  } else {
+                    $(this).prop('disabled', false).html('Delete <i class="fa fa-trash-o"</i>');
+                  }
                 });
 
               });
@@ -795,51 +804,129 @@ $('.typeahead').typeahead(null, {
 
 
   // ===========================About Us Content=============================
-  $('.btn-aboutUs').on('click', function(){
-    var $tag = $('.aboutUs-post #aboutUs-tag').val();
-    var $aboutTitle = $('.aboutUs-post #aboutUs-title').val();
-    var $aboutContent = $('.aboutUs-post #aboutUs-content').val();
+  $.ajax({
+    url: 'https://hau-rappler.herokuapp.com/api/aboutUs',
+    method: 'GET'
+  }).success( function(response){
+    console.log('may laman na');
+    console.log(response);
+    if(response || response !== undefined || response === '' || response === null ){
+      $('.aboutUs-post #aboutUs-tag').val(response.tag);
+      $('.aboutUs-post #aboutUs-title').val(response.title);
+      $('.aboutUs-post #aboutUs-content').val(response.content);
+      $('.btn-aboutUs').on('click', function(){
+        $(this).prop('disabled', true).html('Submiting...');
 
-    $.ajax({
-        url: "https://hau-rappler.herokuapp.com/api/aboutUs",
-        method: "POST",
-        data: {tag: $tag, title:$aboutTitle, content:$aboutContent}
-    }).success( function(response){
-      console.log(response);
-      $('.aboutUs-post input').val('');
-      $('.aboutUs-post .textarea').val('');
-      $('.aboutUs-post .success-process').fadeIn('fast').delay(3001).fadeOut('slow');
-    }).error( function(response){
-      $('.aboutUs-post .error-process').fadeIn('fast').delay(3001).fadeOut('slow');
-    });
+        var $tag = $('.aboutUs-post #aboutUs-tag').val(response.tag);
+        var $aboutTitle = $('.aboutUs-post #aboutUs-title').val(response.title);
+        var $aboutContent = $('.aboutUs-post #aboutUs-content').val(response.content);
 
+        $.ajax({
+            url: "https://hau-rappler.herokuapp.com/api/aboutUs",
+            method: "PUT",
+            data: {tag: $tag, title:$aboutTitle, content:$aboutContent}
+        }).success( function(response){
+          $('.btn-aboutUs').prop('disabled', false).html('Submit');
+          console.log(response);
+          $('.aboutUs-post input').val('');
+          $('.aboutUs-post textarea').val('');
+          $('.aboutUs-post .success-process').fadeIn('fast').delay(3001).fadeOut('slow');
+        }).error( function(response){
+          $('.aboutUs-post .error-process').fadeIn('fast').delay(3001).fadeOut('slow');
+          $('.btn-aboutUs').prop('disabled', false).html('Submit');
+        });
+
+      });
+
+    } else {
+      $('.btn-aboutUs').on('click', function(){
+        $(this).prop('disabled', true).html('Submiting...');
+
+        var $tag = $('.aboutUs-post #aboutUs-tag').val();
+        var $aboutTitle = $('.aboutUs-post #aboutUs-title').val();
+        var $aboutContent = $('.aboutUs-post #aboutUs-content').val();
+
+        $.ajax({
+            url: "https://hau-rappler.herokuapp.com/api/aboutUs",
+            method: "POST",
+            data: {tag: $tag, title:$aboutTitle, content:$aboutContent}
+        }).success( function(response){
+          $('.btn-aboutUs').attr('disabled', false).html('Submit');
+          console.log(response);
+          $('.aboutUs-post input').val('');
+          $('.aboutUs-post textarea').val('');
+          $('.aboutUs-post .success-process').fadeIn('fast').delay(3001).fadeOut('slow');
+        }).error( function(response){
+          $('.aboutUs-post .error-process').fadeIn('fast').delay(3001).fadeOut('slow');
+          $('.btn-aboutUs').attr('disabled', false).html('Submit');
+        });
+
+      });
+
+    }
   });
 
   // ===========================Contact Us content=============================
-    $('.btn-contactUs').on('click', function(){
-    var $st = $('.contactUs-post #contactUs-street').val();
-    var $brgy = $('.contactUs-post #contactUs-brgy').val();
-    var $city = $('.contactUs-post #contactUs-city').val();
-    var $prov = $('.contactUs-post #contactUs-prov').val();
-    var $contact = $('.contactUs-post #contactUs-contac').val();
-    var $content = $('.contactUs-post #contactUs-content').val();
-
-    
     $.ajax({
-        url: "https://hau-rappler.herokuapp.com/api/contact",
-        method: "POST",
-        data: {street: $st, barangay:$brgy, city:$city, province:$prov, contact:$contact, content:$content}
+      url: 'https://hau-rappler.herokuapp.com/api/contact',
+      method: 'GET'
     }).success( function(response){
-      console.log(response);
-      $('.contactUs-post input').val('');
-      $('.contactUs-post .textarea').val('');
-      $('.aboutUs-post .success-process').fadeIn('fast').delay(3001).fadeOut('slow');
-    }).error( function(response){
-      $('.contactUs-post .error-process').fadeIn('fast').delay(3001).fadeOut('slow');
+      if(response || response !== undefined || response === '' || response === null ){
+        $('.btn-contactUs').on('click', function(){
+            $(this).prop('disabled', true).html('Submiting...');
+
+            var $st = $('.contactUs-post #contactUs-street').val();
+            var $brgy = $('.contactUs-post #contactUs-brgy').val();
+            var $city = $('.contactUs-post #contactUs-city').val();
+            var $prov = $('.contactUs-post #contactUs-prov').val();
+            var $contact = $('.contactUs-post #contactUs-contac').val();
+            var $content = $('.contactUs-post #contactUs-content').val();
+
+            $.ajax({
+                url: "https://hau-rappler.herokuapp.com/api/contact",
+                method: "PUT",
+                data: {street: $st, barangay:$brgy, city:$city, province:$prov, contact:$contact, content:$content}
+            }).success( function(response){
+              console.log(response);
+              $('.contactUs-post input').val('');
+              $('.contactUs-post .textarea').val('');
+              $('.aboutUs-post .success-process').fadeIn('fast').delay(3001).fadeOut('slow');
+              $('.btn-contactUs').prop('disabled', false).html('Submit');
+            }).error( function(response){
+              $('.btn-contactUs').prop('disabled', false).html('Submit');
+              $('.contactUs-post .error-process').fadeIn('fast').delay(3001).fadeOut('slow');
+            });
+        });
+      } else {
+        $('.btn-contactUs').on('click', function(){
+            $(this).prop('disabled', true).html('Submiting...');
+
+            var $st = $('.contactUs-post #contactUs-street').val();
+            var $brgy = $('.contactUs-post #contactUs-brgy').val();
+            var $city = $('.contactUs-post #contactUs-city').val();
+            var $prov = $('.contactUs-post #contactUs-prov').val();
+            var $contact = $('.contactUs-post #contactUs-contac').val();
+            var $content = $('.contactUs-post #contactUs-content').val();
+
+            $.ajax({
+                url: "https://hau-rappler.herokuapp.com/api/contact",
+                method: "POST",
+                data: {street: $st, barangay:$brgy, city:$city, province:$prov, contact:$contact, content:$content}
+            }).success( function(response){
+              console.log(response);
+              $('.contactUs-post input').val('');
+              $('.contactUs-post .textarea').val('');
+              $('.aboutUs-post .success-process').fadeIn('fast').delay(3001).fadeOut('slow');
+              $('.btn-contactUs').prop('disabled', false).html('Submit');
+            }).error( function(response){
+              $('.btn-contactUs').prop('disabled', false).html('Submit');
+              $('.contactUs-post .error-process').fadeIn('fast').delay(3001).fadeOut('slow');
+            });
+        });
+
+      }
+
     });
-
-  });
-
 
 
 });

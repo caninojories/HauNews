@@ -17,7 +17,7 @@ body {
 }
 
 .angelite-wrapper {
-  min-height: 85px; 
+  min-height: 85px;
 }
 
 /*Universal*/
@@ -173,8 +173,8 @@ nav.navbar-inverse {
   border-color: transparent;
 }
 
-.navbar-inverse .navbar-nav>.open>a, 
-.navbar-inverse .navbar-nav>.open>a:hover, 
+.navbar-inverse .navbar-nav>.open>a,
+.navbar-inverse .navbar-nav>.open>a:hover,
 .navbar-inverse .navbar-nav>.open>a:focus {
 background-color: transparent;
 color: #fff;
@@ -228,7 +228,7 @@ nav .navbar-nav li > a::after {
 
 nav .navbar-nav li > a:hover::after {
   opacity: 1;
-  transform: translate(0,0); 
+  transform: translate(0,0);
 }
 
 nav .navbar-nav li > a:hover::before {
@@ -256,10 +256,15 @@ li.logout {
 ======================================
 */
 
+.container-wrapper {
+  background-color: #fff;
+}
+
 .heading-news .jumbotron {
   margin-top: 20px;
   border-radius: 2px;
   background-color: #fff;
+  box-shadow: 1px 1px 4px #ccc;
 }
 
 .subscribe {
@@ -348,6 +353,7 @@ li.logout {
 .n {
   height: 500px;
   overflow: hidden;
+  box-shadow: 1px 1px 8px #ccc;
 }
 
 .t {
@@ -360,7 +366,7 @@ li.logout {
   overflow: hidden;
   margin-bottom: 10px;
 }
-  
+
 .news-list .panel.panel-default {
   border: 0;
   border-radius: 2px;
@@ -508,6 +514,15 @@ li.logout {
   height: 35px;
 }
 
+.morenews {
+  cursor:pointer;
+  color: #666;
+}
+
+.morenews:hover {
+  cursor:pointer;
+  color: #a94442;
+}
 
 
 /*===============End================*/
@@ -520,7 +535,7 @@ li.logout {
 */
 
 #indicatorBox {
-    width:110px;   
+    width:110px;
     height:30px;
     background-color:#7C0B0B;
     position:relative;
@@ -572,7 +587,7 @@ li.logout {
 
 /*
 =============================================
-                    Carousel 
+                    Carousel
 =============================================
  */
 
@@ -599,7 +614,7 @@ li.logout {
 
 #bis-wrapper .item .carousel-caption .carousel-title {
   top: 0;
-  left: 0; 
+  left: 0;
   margin-left: 45px;
   margin-right: 45px;
   margin-top: -500px;
@@ -612,7 +627,7 @@ li.logout {
   -moz-transition-delay: .3s;
   -o-transition-delay: .3s;
   transition-delay: .3s;
-} 
+}
 
 #bis-wrapper .item.active .carousel-caption .carousel-title {
   margin-top: 100px;
@@ -631,7 +646,7 @@ li.logout {
   -moz-transition-delay: .8s;
   -o-transition-delay: .8s;
   transition-delay: .8s;
-} 
+}
 
 #bis-wrapper .item.active .carousel-caption p {
   margin-left: 0px;
@@ -685,12 +700,12 @@ li.logout {
   margin-bottom: 0px;
   opacity: 1;
 }
- 
+
 #bis-wrapper #myCarousel .glyphicon-chevron-left {
   position: absolute;
-  right: 0; 
+  right: 0;
   margin-right: 90px;
-  margin-top: 10px;  
+  margin-top: 10px;
   background-color: #222;
   padding: 5px;
   font-size: 20px;
@@ -705,9 +720,9 @@ li.logout {
 
 #bis-wrapper #myCarousel > a.paly-pause-button > span {
   position: absolute;
-  right: 0; 
+  right: 0;
   margin-right: 50px;
-  margin-top: 10px;  
+  margin-top: 10px;
   background-color: #222;
   padding: 5px;
   font-size: 20px;
@@ -722,9 +737,9 @@ li.logout {
 
 #bis-wrapper #myCarousel .glyphicon-chevron-right {
   position: absolute;
-  right: 0; 
+  right: 0;
   margin-right: 10px;
-  margin-top: 10px; 
+  margin-top: 10px;
   background-color: #222;
   padding: 5px;
   font-size: 20px;
@@ -737,8 +752,8 @@ li.logout {
   transition: all .1s ease;
 }
 
-#bis-wrapper #myCarousel .glyphicon-chevron-left:hover, 
-#bis-wrapper #myCarousel .glyphicon-pause:hover, 
+#bis-wrapper #myCarousel .glyphicon-chevron-left:hover,
+#bis-wrapper #myCarousel .glyphicon-pause:hover,
 #bis-wrapper #myCarousel .glyphicon-chevron-right:hover {
   background-color: #C20F0F;
   color: #fff;
@@ -838,15 +853,15 @@ Media Queries*/
   }
 
   #bis-wrapper .item .carousel-caption .btn {
-    margin-top: -20px; 
+    margin-top: -20px;
     font-size: 10px;
   }
-   
+
   #bis-wrapper #myCarousel .glyphicon-chevron-left {
     position: absolute;
-    right: 0; 
+    right: 0;
     margin-right: 84px;
-    margin-top: 8px;  
+    margin-top: 8px;
     background-color: #222;
     padding: 5px;
     font-size: 20px;
@@ -861,9 +876,9 @@ Media Queries*/
 
   #bis-wrapper #myCarousel > a.paly-pause-button > span {
     position: absolute;
-    right: 0; 
+    right: 0;
     margin-right: 46px;
-    margin-top: 8px;  
+    margin-top: 8px;
     background-color: #222;
     padding: 5px;
     font-size: 20px;
@@ -878,9 +893,9 @@ Media Queries*/
 
   #bis-wrapper #myCarousel .glyphicon-chevron-right {
     position: absolute;
-    right: 0; 
+    right: 0;
     margin-right: 8px;
-    margin-top: 8px; 
+    margin-top: 8px;
     background-color: #222;
     padding: 5px;
     font-size: 20px;
@@ -927,15 +942,15 @@ Media Queries*/
   }
 
   #bis-wrapper .item .carousel-caption .btn {
-    margin-top: -40px; 
+    margin-top: -40px;
     font-size: 5px;
   }
-   
+
   #bis-wrapper #myCarousel .glyphicon-chevron-left {
     position: absolute;
-    right: 0; 
+    right: 0;
     margin-right: 62px;
-    margin-top: 3px;  
+    margin-top: 3px;
     background-color: #222;
     padding: 3px;
     font-size: 18px;
@@ -950,9 +965,9 @@ Media Queries*/
 
   #bis-wrapper #myCarousel > a.paly-pause-button > span {
     position: absolute;
-    right: 0; 
+    right: 0;
     margin-right: 34px;
-    margin-top: 3px;  
+    margin-top: 3px;
     background-color: #222;
     padding: 3px;
     font-size: 18px;
@@ -967,9 +982,9 @@ Media Queries*/
 
   #bis-wrapper #myCarousel .glyphicon-chevron-right {
     position: absolute;
-    right: 0; 
+    right: 0;
     margin-right: 5px;
-    margin-top: 3px; 
+    margin-top: 3px;
     background-color: #222;
     padding: 3px;
     font-size: 18px;
@@ -1006,7 +1021,7 @@ footer {
 }
 
 footer .container .row{
-  margin: 20px auto; 
+  margin: 20px auto;
 }
 
 footer .developers span {
@@ -1063,12 +1078,12 @@ footer .dev-social-links a {
 }
 
 footer .dev-social-links a:hover {
-  -webkit-transform: scale(1.2);  
+  -webkit-transform: scale(1.2);
   transform: scale(1.2);
   -webkit-filter: drop-shadow(0px 0px 20px #ccc);
   -moz-filter: drop-shadow(0px 0px 20px #ccc);
   -o-filter: drop-shadow(0px 0px 20px #ccc);
-  filter: 0 0 20px #ccc;  
+  filter: 0 0 20px #ccc;
   opacity: 1;
 }
 
@@ -1195,7 +1210,7 @@ p.content{
   padding-top: 50px;
   padding-bottom: 50px;
   font-family: 'Oswald', sans-serif;
-  min-height: 100vh;  
+  min-height: 100vh;
 }
 
 .main-admin .main-tagline {
@@ -1207,7 +1222,11 @@ p.content{
 .main-admin .sign {
   color: #901313;
 }
- 
+
+.panel-sign {
+  background-color: #ccc;
+}
+
 
 /*=============Comment=============*/
 .comment-area {
@@ -1216,7 +1235,3 @@ p.content{
 
 /*============Contact US============*/
 .contact-us-form { display: none; }
-
-
-
-

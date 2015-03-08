@@ -36,7 +36,7 @@ $(document).ready(function(){
 			var $min = $d.getMinutes();
 
 			var $hours = $d.getHours();
-	    var $hours = ($hours+24-2)%24; 
+	    var $hours = ($hours+24-2)%24;
 	    var $mid='AM';
 	    if($hours==0){ //At 00 hours we need to show 12 am
 	    $hours=12;
@@ -52,7 +52,7 @@ $(document).ready(function(){
 		 	$('.displayName').html($data.displayName);
 		 	$('.imgPath').attr('src',$data.imagePath);
 		 	$('.date').html($day + ', ' + $month + ' ' + $date + ', '+ $year + ' '+ $hours + ':' + $min + ' ' + $mid);
-	 		
+
 	 		var $postId = response._id;
 	 		$.ajax({
 	 			url: "https://hau-rappler.herokuapp.com/api/userInfo",
@@ -61,7 +61,7 @@ $(document).ready(function(){
 	 		}).success(function(response){
  				var $userInfo = response; //userInfo
  				var $mood;
- 				
+
  				//hover mood meter
 	 			$('[data-toggle="tooltip"]').hover(function(){
 					$(this).tooltip('toggle');
@@ -77,7 +77,7 @@ $(document).ready(function(){
 					    	}).success( function(response){
 					    	});
 	 			}
-				
+
 
 	 			function moodMeter(){
 	 				if(!$token){
@@ -118,7 +118,7 @@ $(document).ready(function(){
 									    			var $userMood = response.data.mood;
 										    		var $emo = 'You are <span>'+ $userMood +'</span>. <button class="btn btn-btn btn-xs btn-danger btn-change pull-right">CHANGE</button>';
 							 							$('.changeE').delay(5000).fadeIn('slow').html($emo);
-							 							
+
 							 							$(document).on('click', '.btn-change', function(){
 										 					$.ajax({
 										 						url: 'https://hau-rappler.herokuapp.com/api/mood/postId',
@@ -163,7 +163,7 @@ $(document).ready(function(){
 			 			var afraid = response.afraid / totalVote * 100;
 			 			var sad = response.sad / totalVote * 100;
 			 			var annoyed = response.annoyed / totalVote * 100;
-			 			
+
 			 			if(isNaN(happy) || isNaN(inspired) || isNaN(afraid) || isNaN(sad) || isNaN(annoyed)){
 			 				happy = 0;
 			 				inspired = 0;
@@ -219,7 +219,7 @@ $(document).ready(function(){
 					 					});
 					 				});
 				    		}
-				    		
+
 				    	});
 				    }
 			 		}
@@ -268,11 +268,11 @@ $(document).ready(function(){
 					 		}
 					 	});
 					}
-			 			
+
 			 		setInterval( function(){
 			 			moodVotes();
 			 		}, 15000);
-	 		
+
 
 				//COMMENT
 				var $content;
@@ -296,7 +296,7 @@ $(document).ready(function(){
 								var $year = $date.getFullYear();
 								var $min = $date.getMinutes();
 								var $hr = $date.getHours();
-						    var $hr = ($hr+24-2)%24; 
+						    var $hr = ($hr+24-2)%24;
 						    var $mid='AM';
 						    if($hours==0){ //At 00 hours we need to show 12 am
 						    $hr=12;
@@ -341,10 +341,10 @@ $(document).ready(function(){
 							if(!$token){
 								var $status = 'pending';
 								$('#modalAnonymous').modal('show');
-								$('input.guest-name').focus();
+								$('.guest-name').focus();
 
 								$('.btn-guest').on('click', function(){
-									var $nickname = $('input.guest-name').val();
+									var $nickname = $('.guest-name').val();
 									if($nickname === ""){
 										alert("Invalid username!");
 									}else{
@@ -385,7 +385,7 @@ $(document).ready(function(){
 						setTimeout( function(){
 							listComments();
 						}, 1000);
-						
+
 					}
 				});
 

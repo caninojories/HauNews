@@ -62,7 +62,7 @@
 			</div> <!-- //End of container-fluid -->
 		</nav> <!-- /navbar -->
 	</div> <!-- /end of angelite-wrapper -->
-	
+
 	<div id="beast-nav"></div>
 
 	<div class="news-wrapper">
@@ -80,7 +80,7 @@
 							<!-- Login -->
 							<div class="login-user">
 								<div class="panel">
-									<div class="panel-body">
+									<div class="panel-body panel-sign">
 										<h4 class="sign">SIGN IN</h4>
 										<hr>
 										<div class="alert alert-danger alert-dismissible error-process" style="display:none;" role="alert">
@@ -89,13 +89,13 @@
                     </div>
 										<div class="form-group">
 									    <input type="email" class="form-control" id="email" placeholder="Enter email">
-									    <span class="help-block help-block-email small" style="display:none;">Invalid Email!</span>
+									    <small class="help-block-email text-danger" style="display:none;">Invalid Email!</small>
 									  </div>
 
 									  <div class="form-group">
 									    <input type="password" class="form-control" id="password" placeholder="Password">
 									  </div>
-								  	<button type="submit" class="btn btn-default btn-block btn-btn btn-login"><i class="fa fa-sign-in"></i> Login</button>
+								  	<button type="submit" class="btn btn-block btn-btn btn-login"><i class="fa fa-sign-in"></i> Login</button>
 									</div>
 								</div>
 							</div> <!-- end of login -->
@@ -105,12 +105,12 @@
 							<!-- Register -->
 							<div class="register">
 								<div class="panel">
-									<div class="panel-body">
+									<div class="panel-body panel-sign">
 										<h4 class="sign">SIGN UP NOW!</h4>
 										<hr>
 										<div class="alert alert-success alert-dismissible success-process" style="display:none;" role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <strong>Success!</strong> Successfully registered. 
+                      <strong>Success!</strong> Successfully registered.
                     </div>
                     <div class="alert alert-danger alert-dismissible error-process" style="display:none;" role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -118,22 +118,24 @@
                     </div>
 										<div class="form-group">
 									    <input type="text" class="form-control" id="displayName" placeholder="Enter Username" required>
-									    <span class="help-block help-block-username small" style="display:none;">Minimu of two characters!</span>
+									    <small class="help-block-username text-danger" style="display:none;">Minimu of 2 characters</small>
 									  </div>
 
 									  <div class="form-group">
 									    <input type="email" class="form-control" id="email" placeholder="Enter email" required>
-									    <span class="help-block help-block-email small" style="display:none;">Invalid Email!</span>
+									    <small class="help-block-email text-danger" style="display:none;">Invalid Email</small>
 									  </div>
 
 									  <div class="form-group">
 									    <input type="password" class="form-control" id="password" placeholder="Password" required>
+											<small class="help-block-pass text-danger"></small>
 									  </div>
 
 									  <div class="form-group">
 									    <input type="password" class="form-control" id="cpassword" placeholder="Confirm Password" required>
+											<small class="passmatch"></small>
 									  </div>
-										
+
 										<div class="form-group">
 									  <select class="form-control" id="department" required>
 										  <option value="CICT">CICT</option>
@@ -189,7 +191,7 @@
 	    </div>
 	  </div>
 	</footer>
-	
+
 	<div class="footer">
 	  <div class="container">
 	    <div class="row text-center">

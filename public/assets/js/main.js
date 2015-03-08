@@ -1,11 +1,11 @@
 $(document).ready(function(){
 
-	$(document).ajaxStart(function() {
-  	NProgress.start();
-  });
-	$(document).ajaxStop(function() {
-	  NProgress.done();
-	});
+	// $(document).ajaxStart(function() {
+  // 	NProgress.start();
+  // });
+	// $(document).ajaxStop(function() {
+	//   NProgress.done();
+	// });
 
 	//login identifier
 	  var $token = localStorage.getItem('rappler');
@@ -23,7 +23,7 @@ $(document).ready(function(){
 
 
 // ========================Carousel===========================
-	var $slider = $('#bis-wrapper #myCarousel');
+	var $slider = $('#bis-wrapper .carousel');
 	$slider.carousel({
 		interval: 10000,
 		cycle: true,
@@ -41,13 +41,13 @@ $(document).ready(function(){
 		}
 	});
 
-	$(".dropdown").hover(            
+	$(".dropdown").hover(
         function() {
             $('.dropdown-menu', this).slideDown("fast");
-            $(this).toggleClass('open');        
+            $(this).toggleClass('open');
         },function() {
             $('.dropdown-menu', this).slideUp("fast");
-            $(this).toggleClass('open');       
+            $(this).toggleClass('open');
     });
 
 	$(window).scroll(function (){
@@ -58,7 +58,7 @@ $(document).ready(function(){
 	        $("nav").addClass('navbar-fixed-top');
 	        $("nav").addClass('fadeInDown animated');
 	    }
-	    else 
+	    else
 	    {
 	        $("nav").removeClass('navbar-fixed-top');
 	        $("nav").removeClass('fadeInDown animated');
@@ -83,11 +83,11 @@ $(document).ready(function(){
 	    var currentText = $(this).text();
 	    $(this).text(ellipseThis(currentText));
 	 });
-	  
+
 	  function ellipseThis (currentText) {
 	    if(currentText.length > 300) {
 	      //logic for ellipses
-	      
+
 	      return currentText.substring(0,300) + '...';
 	    } else {
 	      return currentText;
@@ -99,7 +99,7 @@ $(document).ready(function(){
 	  		localStorage.removeItem('rappler');
 	  		window.location = "/";
 	  	});
-	
+
 	// Username
 	if($token){
 		$.ajax({
@@ -116,28 +116,33 @@ $(document).ready(function(){
 		}); //end of userInfo ajax
 	}
 
-
+	$skip = 0;
+	$limit = 10;
 
 	 //NEWS POST
 	 function newsPost(){
 	 $.ajax({
 	 	url: 'https://hau-rappler.herokuapp.com/api/post',
-        method: "GET",
-        data: {limit:1000, skip:0}
+        method: "GET"
 	 }).success(function(response){
-	 	
+
 				var $status = 'approved';
 
 				$.ajax({
 					url: 'https://hau-rappler.herokuapp.com/api/post/approved',
 					method: 'GET',
-					data: {skip:0, limit:20, status:$status}
+					data: {skip:$skip, limit:$limit, status:$status}
 				}).success(function(response){
 
 					var $postList = response;
 				 	var news = '<div class="row">';
+							news += '<div class="col-xs-12">';
+							news += '<hr>';
+							news += '<h4 class="text-danger">Recent News</h4>';
+							news += '<hr>';
+							news += '</div>';
 				 			for(var newslist in $postList){
-							news += '<div class="col-xs-12 col-sm-6 col-md-4"><br>';
+							news += '<div class="col-xs-12 col-sm-6 col-md-4 news-panel"><br>';
 							news += '<div class="panel panel-default angelite-panel">';
 							news += '<div class="panel-body n"><input type="hidden" class="id-post" value="'+ $postList[newslist]._id +'"/>';
 							news +=  	'<div id="indicatorBox">';
@@ -170,7 +175,21 @@ $(document).ready(function(){
 							news +='</div>';
 							}
 							news +='</div>';
+							var more;
+							if($postList.length > 10){
+								more = '<div class="col-xs-12 text-center btn-more">';
+								more += '<hr>';
+								more += '<span class="morenews">...more...</span>';
+								more += '<hr>';
+								more += '</div>';
+							}
 					$('.news-lists').html(news);
+					$('.news-lists').append(more);
+
+					if($skip === $postList.length){
+						$('.btn-more').remove();
+					}
+
 				});
 
 	 }).error( function(response){
@@ -179,9 +198,72 @@ $(document).ready(function(){
 
 	newsPost();
 
-	setInterval( function(){
-		newsPost();
-	}, 20000);
+	$(document).on('click', '.morenews', function(){
+		$skip = $('.news-panel').length;
+		$limit = $skip+10;
+		console.log($skip);
+		console.log($limit);
+		$.ajax({
+	 	url: 'https://hau-rappler.herokuapp.com/api/post',
+        method: "GET"
+	 }).success(function(response){
+
+				var $status = 'approved';
+
+				$.ajax({
+					url: 'https://hau-rappler.herokuapp.com/api/post/approved',
+					method: 'GET',
+					data: {skip:$skip, limit:$limit, status:$status}
+				}).success(function(response){
+					var news;
+					var $postList = response;
+				 			for(var newslist in $postList){
+							var news = '<div class="col-xs-12 col-sm-6 col-md-4 news-panel"><br>';
+							news += '<div class="panel panel-default angelite-panel">';
+							news += '<div class="panel-body n"><input type="hidden" class="id-post" value="'+ $postList[newslist]._id +'"/>';
+							news +=  	'<div id="indicatorBox">';
+							news +=  		'<p class="text-center">'+ $postList[newslist].department +'</p>';
+							news +=  	'</div>';
+							news +=  	'<h4 class="news-title"><p><a href="/post/'+ $postList[newslist]._id +'">'+ $postList[newslist].title +'</a></p></h4>';
+							news +=			'<div class="row">';
+							news +=				'<div class="col-sm-12 col-md-12 col-lg-12 t">';
+							news +=					'<a href="/post/'+ $postList[newslist]._id +'">';
+							news +=					'<div class="news-image t">';
+							news +=					  '<img src="'+ $postList[newslist].imagePath +'" class="img-center img-responsive" alt="">';
+							news +=					'</div>';
+							news +=					'</a>';
+							news +=				'</div>';
+							news +=				'<div class="col-sm-12 col-md-12 col-lg-12 r"><br>';
+						var content = $postList[newslist].content;
+						if(content.length > 150){
+							news +=				'<p class="panel-body-info">'+ content.substr(0, 150) +'...</p>';
+						} else {
+							news +=				'<p class="panel-body-info">'+ content +'</p>';
+						}
+							news +=			'</div>';
+							news +=			'<div class="col-sm-12"><a class="btn btn-btn" href="/post/'+ $postList[newslist]._id +'"/post/">read more...</a></div>';
+							news +=		'</div>';
+							news +=	'</div>';
+							news +=	'<div class="panel-footer">';
+							news +=  	'<span class="author"><small>Posted by : '+ $postList[newslist].displayName +' </small></span>';
+							news +=	'</div>';
+							news +='</div>';
+							news +='</div>';
+							}
+					$('.news-lists > .row').append(news);
+
+					if($skip === $postList.length){
+						$('.btn-more').remove();
+					}
+				});
+
+	 });
+	});
+
+	// setInterval( function(){
+	// 	newsPost();
+	// }, 20000);
+
 
 var $department = 'null';
 //============= headine news ================
@@ -269,16 +351,16 @@ var $department = 'null';
      	}
      			counter +='</ol>';
 
-      $('.carousel-inner').append($slideCarousel);
+      $('#myCarousel').append($slideCarousel);
       $('#myCarousel').append(counter);
     } else{
     	$('#myCarousel').removeClass('carousel slide').hide();
     }
 
   });
-	
+
 	var subscribeClick = false;
-	
+
 	$('.subscribe-email').keyup( function(){
 		var subscribe = $('.subscribe-email').val();
   	var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -367,16 +449,6 @@ var $department = 'null';
 			}
 		}
 	});
-
-
-    $.ajax({
-        url: "https://hau-rappler.herokuapp.com/api/aboutUs",
-        method: "GET"
-    }).success( function(response){
-      console.log(response);
-    }).error( function(response){
-      console.log(response);
-    });
 
 
 });
