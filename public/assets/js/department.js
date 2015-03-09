@@ -51,7 +51,7 @@ $.ajax({
 			}
 			}
 			dNews +='</div>';
-	$('.department-news-lists').html(dNews);
+	$('.department-news-lists').append(dNews);
 
   //============= headine news ================
   $.ajax({
@@ -60,16 +60,15 @@ $.ajax({
     data: {department: $department}
   }).success( function(response){
     if(response){
-      ('.heading-news.department-headline').addClass('animated bounceInRight').show();
+			$('.dep-headline').removeClass('hidden');
+      ('.department-headline').addClass('animated bounceInRight').show();
       booleanHeadline = true;
       $('.headline-title').html(response.title);
       if(response.content.length > 300){
       	$('.headline-content').html(response.content.substr(0, 300)+'...');
       }
       $('.headline-readmore').attr('href', '/post/'+response.postId);
-    } else{
-			$('.dep-headline').remove();
-		}
+    }
 
   });
 
@@ -80,15 +79,13 @@ $.ajax({
     data: {department: $department}
   }).success( function(response){
     if(response[0]){
-      // booleanHeadline = true;
+			$('.top-10-news').removeClass('hidden');
       var topTenArray = '<ul class"list-group">';
       for(var topNews in response[0].postTopTen){
           topTenArray += '<li class="list-group-item"><a href="/post/'+response[0].postTopTen[topNews].postId+'"> '+response[0].postTopTen[topNews].title+'</a></li>';
       }
           topTenArray += '</ul>';
       $('.top-ten-news').html(topTenArray);
-    }else {
-      $('.top-10-news').hide();
     }
 
   });

@@ -110,23 +110,26 @@ $(document).ready(function(){
 			$('.register #cpassword').val('');
 			$('.register .btn-register').html('Submit');
 			$('.register .btn-register').prop('disabled', false);
-		}else{
-			// 	$.ajax({
-			// 		url: "https://hau-rappler.herokuapp.com/api/registration",
-			// 		method:"POST",
-			// 		data:{displayName:$displayName, email:$email, password:$password, department:$department}
-			//
-			// 	}).success( function(response){
-			// $('.register .reg-warning').html('<div class="alert alert-success alert-dismissible error-process" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Successful!</strong> Thank you for registering. Please confirm your email now.</div>');
+		}else if (!$('.agreeterms').is(':checked')){
+			$('.register .reg-warning').html('<div class="alert alert-danger alert-dismissible error-process" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Opps!</strong> Please agree to our terms and conditions to continue registration.</div>');
+			$('.register .btn-register').html('Submit');
+			$('.register .btn-register').prop('disabled', false);
+    } else{
+				$.ajax({
+					url: "https://hau-rappler.herokuapp.com/api/registration",
+					method:"POST",
+					data:{displayName:$displayName, email:$email, password:$password, department:$department}
+
+				}).success( function(response){
+			$('.register .reg-warning').html('<div class="alert alert-success alert-dismissible error-process" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Successful!</strong> Thank you for registering. Please confirm your email now.</div>');
 				$('.register input').val('');
-			// 	$('.register .btn-register').html('Submit');
-			// 	$('.register .btn-register').prop('disabled', false);
-			// 	}).error( function(response){
+				$('.register .btn-register').html('Submit');
+				$('.register .btn-register').prop('disabled', false);
+				}).error( function(response){
 				$('.register .reg-warning').html('<div class="alert alert-danger alert-dismissible error-process" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Error!</strong>Server error or maybe your already registered email. Please <a href="/contact-us.html">contact us</a> and leave as your message</div>');
 				$('.register .btn-register').html('Submit');
 				$('.register .btn-register').prop('disabled', false);
-			// 	});
-			console.log("yeah");
+				});
 	 	}
 	}); //end ajax registration
  });

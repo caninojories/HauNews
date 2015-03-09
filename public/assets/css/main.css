@@ -263,7 +263,7 @@ li.logout {
 .heading-news .jumbotron {
   margin-top: 20px;
   border-radius: 2px;
-  background-color: #fff;
+  background-color: #F7F7F7;
   box-shadow: 1px 1px 4px #ccc;
 }
 
@@ -354,6 +354,7 @@ li.logout {
   height: 500px;
   overflow: hidden;
   box-shadow: 1px 1px 8px #ccc;
+  background-color: #F7F7F7;
 }
 
 .t {
