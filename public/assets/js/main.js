@@ -18,6 +18,7 @@ $(document).ready(function(){
 			  	$('.login').hide();
 			  	$('.logout').css('display', 'block');
 			  	$('.display-panel').show();
+					$('.displayed-username i').removeClass('hidden');
 			  }
 
 
@@ -153,7 +154,7 @@ $(document).ready(function(){
 							news +=				'<div class="col-sm-12 col-md-12 col-lg-12 t">';
 							news +=					'<a href="/post/'+ $postList[newslist]._id +'">';
 							news +=					'<div class="news-image t">';
-							news +=					  '<img src="'+ $postList[newslist].imagePath +'" class="img-center img-responsive" alt="">';
+							news +=					  '<img src="'+ $postList[newslist].imagePath[0] +'" class="img-center img-responsive" alt="">';
 							news +=					'</div>';
 							news +=					'</a>';
 							news +=				'</div>';
@@ -229,7 +230,7 @@ $(document).ready(function(){
 							news +=				'<div class="col-sm-12 col-md-12 col-lg-12 t">';
 							news +=					'<a href="/post/'+ $postList[newslist]._id +'">';
 							news +=					'<div class="news-image t">';
-							news +=					  '<img src="'+ $postList[newslist].imagePath +'" class="img-center img-responsive" alt="">';
+							news +=					  '<img src="'+ $postList[newslist].imagePath[0] +'" class="img-center img-responsive" alt="">';
 							news +=					'</div>';
 							news +=					'</a>';
 							news +=				'</div>';
@@ -283,7 +284,7 @@ var $department = 'null';
       }
       $('.headline-readmore').attr('href', '/post/'+response.postId);
     } else {
-    	$('.heading-news').remove();
+    	$('.home-headline').remove();
     }
 
   });
@@ -327,7 +328,7 @@ var $department = 'null';
       	}else{
       		$slideCarousel += '<div class="item">';
       	}
-      		$slideCarousel += '<img class="img-responsive" src="' +response[0].carousel[carousel].imagePath+ '" alt="">';
+      		$slideCarousel += '<img class="img-responsive" src="' +response[0].carousel[carousel].imagePath[0]+ '" alt="">';
       		$slideCarousel += '<div class="container-fluid">';
       		$slideCarousel += '<div class="carousel-caption">';
       		$slideCarousel += '<h3 class="carousel-title">' +response[0].carousel[carousel].title+ ' </h3>';

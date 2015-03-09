@@ -1235,3 +1235,19 @@ p.content{
 
 /*============Contact US============*/
 .contact-us-form { display: none; }
+
+
+/*============About US============*/
+.aboutus-page {
+  margin: 30px 0;
+  background-color: #fff !important;
+}
+
+.aboutus-inner {
+  padding: 30px 0;
+}
+
+#aboutContent {
+  font-weight: 300;
+  color: #555;
+}

@@ -1,0 +1,184 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'request', '--save' ]
+2 info using npm@2.5.1
+3 info using node@v0.12.0
+4 warn package.json online-news@1.0.0 No repository field.
+5 warn package.json online-news@1.0.0 No README data
+6 silly cache add args [ 'request', null ]
+7 verbose cache add spec request
+8 silly cache add parsed spec { raw: 'request',
+8 silly cache add   scope: null,
+8 silly cache add   name: 'request',
+8 silly cache add   rawSpec: '',
+8 silly cache add   spec: '*',
+8 silly cache add   type: 'range' }
+9 verbose addNamed request@*
+10 silly addNamed semver.valid null
+11 silly addNamed semver.validRange *
+12 silly addNameRange { name: 'request', range: '*', hasData: false }
+13 silly mapToRegistry name request
+14 silly mapToRegistry using default registry
+15 silly mapToRegistry registry https://registry.npmjs.org/
+16 silly mapToRegistry uri https://registry.npmjs.org/request
+17 verbose addNameRange registry:https://registry.npmjs.org/request not in flight; fetching
+18 verbose request uri https://registry.npmjs.org/request
+19 verbose request no auth needed
+20 info attempt registry request try #1 at 5:57:31 PM
+21 verbose request id 9e8d4f3bfbe002c6
+22 verbose etag "63WNA445V2BJYIKJ23OC1Z2EK"
+23 http request GET https://registry.npmjs.org/request
+24 info retry will retry, error on last attempt: Error: getaddrinfo ENOTFOUND registry.npmjs.org
+25 info attempt registry request try #2 at 5:57:41 PM
+26 verbose etag "63WNA445V2BJYIKJ23OC1Z2EK"
+27 http request GET https://registry.npmjs.org/request
+28 info retry will retry, error on last attempt: Error: getaddrinfo ENOTFOUND registry.npmjs.org
+29 info attempt registry request try #3 at 5:58:41 PM
+30 verbose etag "63WNA445V2BJYIKJ23OC1Z2EK"
+31 http request GET https://registry.npmjs.org/request
+32 http 200 https://registry.npmjs.org/request
+33 silly get cb [ 200,
+33 silly get   { date: 'Sun, 08 Mar 2015 09:58:44 GMT',
+33 silly get     server: 'CouchDB/1.6.1 (Erlang OTP/R14B04)',
+33 silly get     etag: '"DSZ3Z6WBNPDJUW3XGZXZ3Y41J"',
+33 silly get     'content-type': 'application/json',
+33 silly get     'cache-control': 'max-age=60',
+33 silly get     'content-length': '140322',
+33 silly get     'accept-ranges': 'bytes',
+33 silly get     via: '1.1 varnish',
+33 silly get     age: '11',
+33 silly get     'x-served-by': 'cache-sjc3123-SJC',
+33 silly get     'x-cache': 'HIT',
+33 silly get     'x-cache-hits': '1',
+33 silly get     'x-timer': 'S1425808724.502132,VS0,VE0',
+33 silly get     vary: 'Accept',
+33 silly get     'keep-alive': 'timeout=10, max=50',
+33 silly get     connection: 'Keep-Alive' } ]
+34 verbose get saving request to /Users/apple/.npm/registry.npmjs.org/request/.cache.json
+35 silly addNameRange number 2 { name: 'request', range: '*', hasData: true }
+36 silly addNameRange versions [ 'request',
+36 silly addNameRange   [ '0.10.0',
+36 silly addNameRange     '0.8.3',
+36 silly addNameRange     '0.9.0',
+36 silly addNameRange     '0.9.1',
+36 silly addNameRange     '0.9.5',
+36 silly addNameRange     '1.0.0',
+36 silly addNameRange     '1.1.0',
+36 silly addNameRange     '1.1.1',
+36 silly addNameRange     '1.2.0',
+36 silly addNameRange     '1.9.0',
+36 silly addNameRange     '1.9.1',
+36 silly addNameRange     '1.9.2',
+36 silly addNameRange     '1.9.3',
+36 silly addNameRange     '1.9.5',
+36 silly addNameRange     '1.9.7',
+36 silly addNameRange     '1.9.8',
+36 silly addNameRange     '1.9.9',
+36 silly addNameRange     '2.0.0',
+36 silly addNameRange     '2.0.1',
+36 silly addNameRange     '2.0.2',
+36 silly addNameRange     '2.0.3',
+36 silly addNameRange     '2.0.4',
+36 silly addNameRange     '2.0.5',
+36 silly addNameRange     '2.1.0',
+36 silly addNameRange     '2.1.1',
+36 silly addNameRange     '2.2.0',
+36 silly addNameRange     '2.2.5',
+36 silly addNameRange     '2.2.6',
+36 silly addNameRange     '2.2.9',
+36 silly addNameRange     '2.9.0',
+36 silly addNameRange     '2.9.1',
+36 silly addNameRange     '2.9.2',
+36 silly addNameRange     '2.9.3',
+36 silly addNameRange     '2.9.100',
+36 silly addNameRange     '2.9.150',
+36 silly addNameRange     '2.9.151',
+36 silly addNameRange     '2.9.152',
+36 silly addNameRange     '2.9.153',
+36 silly addNameRange     '2.9.200',
+36 silly addNameRange     '2.9.201',
+36 silly addNameRange     '2.9.202',
+36 silly addNameRange     '2.9.203',
+36 silly addNameRange     '2.10.0',
+36 silly addNameRange     '2.11.0',
+36 silly addNameRange     '2.11.1',
+36 silly addNameRange     '2.11.2',
+36 silly addNameRange     '2.11.3',
+36 silly addNameRange     '2.11.4',
+36 silly addNameRange     '2.12.0',
+36 silly addNameRange     '2.14.0',
+36 silly addNameRange     '2.16.0',
+36 silly addNameRange     '2.16.2',
+36 silly addNameRange     '2.16.4',
+36 silly addNameRange     '2.16.6',
+36 silly addNameRange     '2.18.0',
+36 silly addNameRange     '2.19.0',
+36 silly addNameRange     '2.20.0',
+36 silly addNameRange     '2.21.0',
+36 silly addNameRange     '2.22.0',
+36 silly addNameRange     '2.23.0',
+36 silly addNameRange     '2.24.0',
+36 silly addNameRange     '2.25.0',
+36 silly addNameRange     '2.26.0',
+36 silly addNameRange     '2.27.0',
+36 silly addNameRange     '2.28.0',
+36 silly addNameRange     '2.29.0',
+36 silly addNameRange     '2.30.0',
+36 silly addNameRange     '2.31.0',
+36 silly addNameRange     '2.32.0',
+36 silly addNameRange     '2.33.0',
+36 silly addNameRange     '2.34.0',
+36 silly addNameRange     '2.35.0',
+36 silly addNameRange     '2.36.0',
+36 silly addNameRange     '2.37.0',
+36 silly addNameRange     '2.38.0',
+36 silly addNameRange     '2.39.0',
+36 silly addNameRange     '2.40.0',
+36 silly addNameRange     '2.41.0',
+36 silly addNameRange     '2.42.0',
+36 silly addNameRange     '2.43.0',
+36 silly addNameRange     '2.44.0',
+36 silly addNameRange     '2.45.0',
+36 silly addNameRange     '2.46.0',
+36 silly addNameRange     '2.47.0',
+36 silly addNameRange     '2.48.0',
+36 silly addNameRange     '2.49.0',
+36 silly addNameRange     '2.50.0',
+36 silly addNameRange     '2.51.0',
+36 silly addNameRange     '2.52.0',
+36 silly addNameRange     '2.53.0' ] ]
+37 verbose addNamed request@2.53.0
+38 silly addNamed semver.valid 2.53.0
+39 silly addNamed semver.validRange 2.53.0
+40 silly mapToRegistry name request
+41 silly mapToRegistry using default registry
+42 silly mapToRegistry registry https://registry.npmjs.org/
+43 silly mapToRegistry uri https://registry.npmjs.org/request
+44 verbose addRemoteTarball https://registry.npmjs.org/request/-/request-2.53.0.tgz not in flight; adding
+45 verbose addRemoteTarball [ 'https://registry.npmjs.org/request/-/request-2.53.0.tgz',
+45 verbose addRemoteTarball   '180a3ae92b7b639802e4f9545dd8fcdeb71d760c' ]
+46 info retry fetch attempt 1 at 5:58:44 PM
+47 info attempt registry request try #1 at 5:58:44 PM
+48 http fetch GET https://registry.npmjs.org/request/-/request-2.53.0.tgz
+49 http fetch 200 https://registry.npmjs.org/request/-/request-2.53.0.tgz
+50 silly fetchAndShaCheck shasum 180a3ae92b7b639802e4f9545dd8fcdeb71d760c
+51 verbose addTmpTarball /var/folders/l0/9_4ms50n65n2qb0vz4t45rvm0000gn/T/npm-13954-dd25e106/registry.npmjs.org/request/-/request-2.53.0.tgz not in flight; adding
+52 verbose addTmpTarball already have metadata; skipping unpack for request@2.53.0
+53 verbose stack Error: EACCES, mkdir '/Users/apple/.npm/request/2.53.0'
+53 verbose stack     at Error (native)
+54 verbose cwd /Users/apple/Desktop/HauNews
+55 error Darwin 14.1.0
+56 error argv "node" "/usr/local/bin/npm" "install" "request" "--save"
+57 error node v0.12.0
+58 error npm  v2.5.1
+59 error path /Users/apple/.npm/request/2.53.0
+60 error code EACCES
+61 error errno -13
+62 error Error: EACCES, mkdir '/Users/apple/.npm/request/2.53.0'
+62 error     at Error (native)
+62 error  { [Error: EACCES, mkdir '/Users/apple/.npm/request/2.53.0']
+62 error   errno: -13,
+62 error   code: 'EACCES',
+62 error   path: '/Users/apple/.npm/request/2.53.0',
+62 error   parent: 'online-news' }
+63 error Please try running this command again as root/Administrator.
+64 verbose exit [ -13, true ]

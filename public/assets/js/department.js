@@ -26,7 +26,7 @@ $.ajax({
 			dNews +=				'<div class="col-sm-12 col-md-12 col-lg-12 t">';
 			dNews +=					'<a href="/post/'+ response[departmentNews]._id +'">';
 			dNews +=					'<div class="news-image t">';
-			dNews +=					  '<img src="'+ response[departmentNews].imagePath +'" class="img-center img-responsive" alt="">';
+			dNews +=					  '<img src="'+ response[departmentNews].imagePath[0] +'" class="img-center img-responsive" alt="">';
 			dNews +=					'</div>';
 			dNews +=					'</a>';
 			dNews +=				'</div>';
@@ -67,7 +67,9 @@ $.ajax({
       	$('.headline-content').html(response.content.substr(0, 300)+'...');
       }
       $('.headline-readmore').attr('href', '/post/'+response.postId);
-    }
+    } else{
+			$('.dep-headline').remove();
+		}
 
   });
 
@@ -110,7 +112,7 @@ $.ajax({
       	}else{
       		$slideCarousel += '<div class="item">';
       	}
-      		$slideCarousel += '<img class="img-responsive" src="https://hau-rappler.herokuapp.com/uploads/' +response[0].carousel[carousel].imagePath+ '" alt="">';
+      		$slideCarousel += '<img class="img-responsive" src="https://hau-rappler.herokuapp.com/uploads/' +response[0].carousel[carousel].imagePath[0]+ '" alt="">';
       		$slideCarousel += '<div class="container-fluid">';
       		$slideCarousel += '<div class="carousel-caption">';
       		$slideCarousel += '<h3 class="carousel-title">' +response[0].carousel[carousel].title+ ' </h3>';

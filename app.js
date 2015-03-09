@@ -39,3 +39,7 @@ app.get('/highschool', function(req, res){
 app.listen(app.get('port'), function() {
   console.log("Listening to port: " + app.get('port'));
 });
+
+app.get('/user/verify/:id', function(req, res){
+  res.sendFile('verify.html',{ root: __dirname + '/public'});
+})

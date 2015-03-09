@@ -3,6 +3,7 @@ $(document).ready( function(){
     url:'https://hau-rappler.herokuapp.com/api/aboutUs',
     method: 'GET'
   }).success( function(response){
+    console.log(response);
     if(response){
       $('#aboutTag').html(response.tag);
       $('#aboutTitle').html(response.title);

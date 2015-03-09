@@ -282,6 +282,7 @@ $(document).ready(function(){
                           $post +=            '<th>Status</th>';
                           $post +=            '<th>Edit News</th>';
                           $post +=            '<th>Delete</th>';
+                          $post +=            '<th>Email Post</th>';
                           $post +=        '</tr>';
                           $post +=    '</thead>';
                           $post += '<tbody>';
@@ -289,7 +290,7 @@ $(document).ready(function(){
                           $post += '<tr><td>' + response[news].email + '</td>';
                           $post += '<td>' + response[news].displayName + '</td>';
                           $post += '<td class="news-title">' + response[news].title + '</td>';
-                          $post += '<td><button class="btn btn-sm btn-info view-content">view content <i class="fa fa-search-plus"></i></button><p class="news-content" hidden>'+ response[news].content +'</p><img class="img-responsive news-img hidden" src="'+ response[news].imagePath +'" /></td>';
+                          $post += '<td><button class="btn btn-sm btn-info view-content">view content <i class="fa fa-search-plus"></i></button><p class="news-content" hidden>'+ response[news].content +'</p><img class="img-responsive news-img hidden" src="'+ response[news].imagePath[0] +'" /></td>';
                         if(response[news].status === "pending"){
                           $post += '<td><button class="btn btn-sm status-news btn-primary">' + response[news].status + '</button></td>';
                         } else {
@@ -301,6 +302,7 @@ $(document).ready(function(){
                           $post += '<td><button class="btn btn-sm btn-warning disabled" disabled>edit <i class="fa fa-gavel"></button></td>';
                         }
                           $post += '<td><button class="btn btn-sm btn-danger btn-delete-post">Delete <i class="fa fa-trash-o"></button></td>';
+                          $post += '<td><button class="btn btn-default btn-sm btn-subscriber">Send <i class="fa fa-envelope"></i></button></td>';
                           $post += '<td hidden><input type="text" value="'+ response[news]._id +'"/></td></tr>';
                       }
                           $post += '</tbody>';
@@ -357,6 +359,7 @@ $(document).ready(function(){
                             $('#editPost .edit-image').val($editImage);
                           });
 
+                          //Delete
                           $(document).on('click', '.btn-delete-post', function(){
                             var $id = $(this).parent('td').siblings('td').children('input').val();
                             $(this).parent('td').parent('tr').slideUp(1000).remove();
@@ -366,6 +369,25 @@ $(document).ready(function(){
                               data:{id: $id}
                             }).success( function(response){
                               console.log(response);
+                            });
+                          });
+
+                          //Send email subscription
+                          $(document).on('click', '.btn-subscriber', function(){
+                            var $id = $(this).parent('td').siblings('td').children('input').val();
+                            console.log($id);
+                            $(this).prop('disabled', true).html('Sending <i class="fa fa-spinner fa-pulse"></i>');
+                            $.ajax({
+                              url: 'https://hau-rappler.herokuapp.com/api/post/sendSubscribe',
+                              method: 'POST',
+                              data: {id: $id}
+                            }).success( function(response){
+                              console.log(response);
+                              $('.btn-subscriber').prop('disabled', false).html('Send <i class="fa fa-envelope"></i>');
+                              alert('Successfully sent news to subscriber\'s email.');
+                            }).error( function(response){
+                              $('.btn-subscriber').prop('disabled', false).html('Send <i class="fa fa-envelope"></i>');
+                              alert('Error while sending news to subscriber\'s email.');
                             });
                           });
 
@@ -425,11 +447,20 @@ $(document).ready(function(){
     // Create news
     function uploadFile(){
       var input = document.getElementById("file");
-      file = input.files[0];
+      var file = input.files;
       if(file != undefined){
         formData= new FormData();
-        if(!!file.type.match(/image.*/)){
-          formData.append("image", file);
+        for( var i = 0; i < file.length; i++) {
+          console.log(file[i]);
+          if(!!file[i].type.match(/image.*/)) {
+            formData.append("image", file[i]);
+          } else {
+            $('.error-process').fadeIn('fast').delay(3001).fadeOut('slow');
+            $('.create-news').prop('disabled', false).html('Submit');
+            return;
+          }
+        }
+
           $.ajax({
             url: "https://hau-rappler.herokuapp.com/api/photo",
             type: "POST",
@@ -440,6 +471,7 @@ $(document).ready(function(){
               var $title = $('#title').val();
               var $content = $('#content').val();
               var $imagePath = response.imagePath;
+              console.log("imagePath: "+response);
               $.ajax({
                   url: "https://hau-rappler.herokuapp.com/api/post",
                   method: "POST",
@@ -448,12 +480,15 @@ $(document).ready(function(){
                 $('input').val('');
                 $('.textarea').val('');
                 $('.success-process').fadeIn('fast').delay(3001).fadeOut('slow');
+                $('.create-news').prop('disabled', false).html('Submit');
+              }).error( function(response){
+                $('input').val('');
+                $('.textarea').val('');
+                $('.success-process').fadeIn('fast').delay(3001).fadeOut('slow');
+                $('.create-news').prop('disabled', false).html('Submit');
               });
             }
           });
-        } else{
-          $('.error-process').fadeIn('fast').delay(3001).fadeOut('slow');
-        }
       } else {
           var $title = $('#title').val();
           var $content = $('#content').val();
@@ -465,13 +500,16 @@ $(document).ready(function(){
             $('input').val('');
             $('.textarea').val('');
             $('.success-process').fadeIn('fast').delay(3001).fadeOut('slow');
+            $('.create-news').prop('disabled', false).html('Submit');
           });
         }
     }
 
     $('.create-news').on('click', function(){
+        $(this).prop('disabled', true).html('saving...');
         uploadFile();
         $('.create-news input').val("");
+        $('.create-news textarea').val("");
     });
 
     //Delete
@@ -588,15 +626,21 @@ $('.typeahead').typeahead(null, {
         postId: response.id,
         title: response.title,
       });
-
-
+      console.log(objTopten);
       for( var obj in objTopten ){
-        var topTen = '<li><i class="fa fa-arrow-circle-right"></i> '+objTopten[obj].title+'</li>';
+        var topTen = '<li class="active"><i class="fa fa-arrow-circle-right"></i> '+objTopten[obj].title+' <button class="btn btn-xs btn-danger removeSplice">Remove</button></li>';
       }
 
       $('.topTen').append(topTen);
     }
   }
+
+  $(document).on('click', '.removeSplice', function(e){
+    e.preventDefault();
+    var removeThis = $(this).parent('li.active').index();
+    console.log(removeThis);
+    objTopten.splice(0, removeThis);
+  });
 
   //============== News Slides ====================
   if($navtab.eq(2).hasClass('active')){
@@ -751,11 +795,19 @@ $('.typeahead').typeahead(null, {
       // Create news
     function uploadFilePUT(){
       var input = document.getElementById("editFile");
-      file = input.files[0];
+      var file = input.files;
       if(file != undefined){
         formData= new FormData();
-        if(!!file.type.match(/image.*/)){
-          formData.append("image", file);
+        for( var i = 0; i < file.length; i++) {
+          console.log(file[i]);
+          if(!!file[i].type.match(/image.*/)) {
+            formData.append("image", file[i]);
+          } else {
+            $('.error-process').fadeIn('fast').delay(3001).fadeOut('slow');
+            alert("No changes has been made.");
+            return;
+          }
+        }
           $.ajax({
             url: "https://hau-rappler.herokuapp.com/api/photo",
             type: "POST",
@@ -778,9 +830,6 @@ $('.typeahead').typeahead(null, {
                 });
             }
           });
-        }else{
-          $('.error-process').fadeIn('fast').delay(3001).fadeOut('slow');
-        }
       } else {
           var $id = $('#editPost .edit-id').val();
           var $title = $('#editPost .edit-title').val();
@@ -808,14 +857,14 @@ $('.typeahead').typeahead(null, {
     url: 'https://hau-rappler.herokuapp.com/api/aboutUs',
     method: 'GET'
   }).success( function(response){
-    console.log('may laman na');
     console.log(response);
-    if(response || response !== undefined || response === '' || response === null ){
+    if(response){
       $('.aboutUs-post #aboutUs-tag').val(response.tag);
       $('.aboutUs-post #aboutUs-title').val(response.title);
       $('.aboutUs-post #aboutUs-content').val(response.content);
+
       $('.btn-aboutUs').on('click', function(){
-        $(this).prop('disabled', true).html('Submiting...');
+        $(this).prop('disabled', true).html('Submitting...');
 
         var $tag = $('.aboutUs-post #aboutUs-tag').val(response.tag);
         var $aboutTitle = $('.aboutUs-post #aboutUs-title').val(response.title);
@@ -839,6 +888,7 @@ $('.typeahead').typeahead(null, {
       });
 
     } else {
+
       $('.btn-aboutUs').on('click', function(){
         $(this).prop('disabled', true).html('Submiting...');
 
@@ -871,7 +921,9 @@ $('.typeahead').typeahead(null, {
       url: 'https://hau-rappler.herokuapp.com/api/contact',
       method: 'GET'
     }).success( function(response){
-      if(response || response !== undefined || response === '' || response === null ){
+      console.log(response);
+      if(response){
+        console.log('Edit contact');
         $('.btn-contactUs').on('click', function(){
             $(this).prop('disabled', true).html('Submiting...');
 
@@ -895,19 +947,28 @@ $('.typeahead').typeahead(null, {
             }).error( function(response){
               $('.btn-contactUs').prop('disabled', false).html('Submit');
               $('.contactUs-post .error-process').fadeIn('fast').delay(3001).fadeOut('slow');
+              $('.contactUs-post input').val('');
+              $('.contactUs-post .textarea').val('');
             });
         });
       } else {
+        console.log('Add contact');
+        $('.contactUs-post #contactUs-content').addClass('textarea');
         $('.btn-contactUs').on('click', function(){
-            $(this).prop('disabled', true).html('Submiting...');
+            $(this).prop('disabled', true).html('Submitting...');
 
             var $st = $('.contactUs-post #contactUs-street').val();
             var $brgy = $('.contactUs-post #contactUs-brgy').val();
             var $city = $('.contactUs-post #contactUs-city').val();
             var $prov = $('.contactUs-post #contactUs-prov').val();
-            var $contact = $('.contactUs-post #contactUs-contac').val();
+            var $contact = $('.contactUs-post #contactUs-contact').val();
             var $content = $('.contactUs-post #contactUs-content').val();
-
+            console.log($st);
+            console.log($brgy);
+            console.log($city);
+            console.log($prov);
+            console.log($contact);
+            console.log($content);
             $.ajax({
                 url: "https://hau-rappler.herokuapp.com/api/contact",
                 method: "POST",
@@ -916,7 +977,7 @@ $('.typeahead').typeahead(null, {
               console.log(response);
               $('.contactUs-post input').val('');
               $('.contactUs-post .textarea').val('');
-              $('.aboutUs-post .success-process').fadeIn('fast').delay(3001).fadeOut('slow');
+              $('.contactUs-post .success-process').fadeIn('fast').delay(3001).fadeOut('slow');
               $('.btn-contactUs').prop('disabled', false).html('Submit');
             }).error( function(response){
               $('.btn-contactUs').prop('disabled', false).html('Submit');

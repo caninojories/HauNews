@@ -39,7 +39,7 @@
         <li class=""><a href="#">Posted News<span class="sub_icon fa fa-newspaper-o"></span></a></li>
         <li class=""><a href="#">Comments<span class="sub_icon fa fa-sign-in"></span></a></li>
         <li class="headline-tab"><a href="#">Headlines<span class="sub_icon fa fa-file-o"></span></a></li>
-        <li class=""><a href="#">Create News<span class="sub_icon fa fa-file"></span></a></li>
+        <li class=""><a href="#">Email<span class="sub_icon fa fa-envelope-o"></span></a></li>
       </ul>
     </div>
 
@@ -53,83 +53,113 @@
             <div class="news-tab">
               <!-- Dashboard -->
             	<div class="news-tab-content active">
-            		<div class="alert alert-success alert-dismissible" role="alert">
+
+								<div class="alert alert-success alert-dismissible" role="alert">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Hello</strong> Welcome to admin panel.
                 </div>
-                <div class="col-sm-12">
-                  <!-- About us -->
-                  <div class="panel">
-                    <div class="panel-heading"><h4>Manage About Us</h4></div>
-                    <div class="panel-body">
-                      <div class="aboutUs-post">
-                        <div class="alert alert-success alert-dismissible success-process aboutUs-alert" style="display:none;" role="alert">
-                          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          <strong>Success!</strong>
-                        </div>
-                        <div class="alert alert-danger alert-dismissible error-process" style="display:none;" role="alert">
-                          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          <strong>Error!</strong>
-                        </div>
-                        <div class="form-group">
-                          <label for="aboutUs-tag">Tag</label>
-                          <input type="text" class="form-control" id="aboutUs-tag" placeholder="ex. ABOUT US">
-                        </div>
-                        <div class="form-group">
-                          <label for="aboutUs-title">Title</label>
-                          <input type="text" class="form-control" id="aboutUs-title" placeholder="Enter Title">
-                        </div>
-                        <div class="form-group">
-                          <label for="aboutUs-content">Content</label>
-                          <textarea type="text" class="form-control" id="aboutUs-content" placeholder="About us content" rows="10"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-aboutUs">Submit</button>
-                      </div> <!-- //aboutUs -->
-                    </div>
-                  </div> <!-- //end of panel -->
 
-									<!-- Contact Us -->
-									<div class="panel">
-										<div class="panel-heading"><h4>Manage Contac Us Content</h4></div>
-										<div class="panel-body">
-											<div class="contactUs-post">
-												<div class="alert alert-success alert-dismissible success-process contactUs-alert" style="display:none;" role="alert">
-													<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-													<strong>Success!</strong>
-												</div>
-												<div class="alert alert-danger alert-dismissible error-process contactUs-alert" style="display:none;" role="alert">
-													<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-													<strong>Error!</strong>
-												</div>
-												<div class="form-group">
-													<label for="contactUs-street">Street</label>
-													<input type="text" class="form-control" id="contactUs-street" placeholder="Street">
-												</div>
-												<div class="form-group">
-													<label for="contactUs-brgy">Barangay</label>
-													<input type="text" class="form-control" id="contactUs-brgy" placeholder="Barangay">
-												</div>
-												<div class="form-group">
-													<label for="contactUs-city">City</label>
-													<input type="text" class="form-control" id="contactUs-city" placeholder="City">
-												</div>
-												<div class="form-group">
-													<label for="contactUs-prov">Provice</label>
-													<input type="text" class="form-control" id="contactUs-prov" placeholder="City">
-												</div>
-												<div class="form-group">
-													<label for="contactUs-contact">Contact</label>
-													<input type="text" class="form-control" id="contactUs-contact" placeholder="Contact">
-												</div>
-												<div class="form-group">
-													<label for="contactUs-content">Content</label>
-													<textarea type="text" class="form-control" id="contactUs-content" placeholder="About us content" rows="10"></textarea>
-												</div>
-												<button type="submit" class="btn btn-primary btn-contactUs">Submit</button>
-											</div> <!-- //contactUs -->
-										</div>
-									</div> <!-- //end of panel -->
+								<div class="panel">
+									<div class="panel-heading"><h4>Create News</h4></div>
+									<div class="panel-body">
+										<div class="createNews">
+											<div class="alert alert-success alert-dismissible success-process" style="display:none;" role="alert">
+												<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<strong>Success!</strong> Your article has been successfully posted.
+											</div>
+											<div class="alert alert-danger alert-dismissible error-process" style="display:none;" role="alert">
+												<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<strong>Error!</strong> Your article was not successfully posted.
+											</div>
+											<div class="form-group">
+												<label for="title">Title</label>
+												<input type="text" class="form-control" id="title" placeholder="Enter Title">
+											</div>
+											<div class="form-group">
+												<label for="content">Article content</label>
+												<textarea type="text" class="form-control textarea" id="content" placeholder="Article content" rows="10"></textarea>
+											</div>
+											<div class="form-group">
+												<label for="image">Image File</label>
+												<input type="file" id="file" name="image" multiple>
+												<p class="help-block">Pleas choose a image type of jpeg, jpg and png.</p>
+											</div>
+											<button type="submit" class="btn btn-primary create-news">Submit</button>
+										</div> <!-- //createNews -->
+									</div>
+								</div>
 
-                </div>
+                <!-- About us -->
+                <div class="panel">
+                  <div class="panel-heading"><h4>Manage About Us</h4></div>
+                  <div class="panel-body">
+                    <div class="aboutUs-post">
+                      <div class="alert alert-success alert-dismissible success-process aboutUs-alert" style="display:none;" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Success!</strong>
+                      </div>
+                      <div class="alert alert-danger alert-dismissible error-process" style="display:none;" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Error!</strong>
+                      </div>
+                      <div class="form-group">
+                        <label for="aboutUs-tag">Tag</label>
+                        <input type="text" class="form-control" id="aboutUs-tag" placeholder="ex. ABOUT US">
+                      </div>
+                      <div class="form-group">
+                        <label for="aboutUs-title">Title</label>
+                        <input type="text" class="form-control" id="aboutUs-title" placeholder="Enter Title">
+                      </div>
+                      <div class="form-group">
+                        <label for="aboutUs-content">Content</label>
+                        <textarea type="text" class="form-control textarea" id="aboutUs-content" placeholder="About us content" rows="10"></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary btn-aboutUs">Submit</button>
+                    </div> <!-- //aboutUs -->
+                  </div>
+                </div> <!-- //end of panel -->
+
+								<!-- Contact Us -->
+								<div class="panel">
+									<div class="panel-heading"><h4>Manage Contac Us Content</h4></div>
+									<div class="panel-body">
+										<div class="contactUs-post">
+											<div class="alert alert-success alert-dismissible success-process contactUs-alert" style="display:none;" role="alert">
+												<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<strong>Success!</strong>
+											</div>
+											<div class="alert alert-danger alert-dismissible error-process contactUs-alert" style="display:none;" role="alert">
+												<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<strong>Error!</strong>
+											</div>
+											<div class="form-group">
+												<label for="contactUs-street">Street</label>
+												<input type="text" class="form-control" id="contactUs-street" placeholder="Street">
+											</div>
+											<div class="form-group">
+												<label for="contactUs-brgy">Barangay</label>
+												<input type="text" class="form-control" id="contactUs-brgy" placeholder="Barangay">
+											</div>
+											<div class="form-group">
+												<label for="contactUs-city">City</label>
+												<input type="text" class="form-control" id="contactUs-city" placeholder="City">
+											</div>
+											<div class="form-group">
+												<label for="contactUs-prov">Provice</label>
+												<input type="text" class="form-control" id="contactUs-prov" placeholder="Province">
+											</div>
+											<div class="form-group">
+												<label for="contactUs-contact">Contact</label>
+												<input type="text" class="form-control" id="contactUs-contact" placeholder="Contact">
+											</div>
+											<div class="form-group">
+												<label for="contactUs-content">Content</label>
+												<textarea type="text" class="form-control" id="contactUs-content" placeholder="About us content" rows="10"></textarea>
+											</div>
+											<button type="submit" class="btn btn-primary btn-contactUs">Submit</button>
+										</div> <!-- //contactUs -->
+									</div>
+								</div> <!-- //end of panel -->
+
             	</div>
 
               <!-- List of admin -->
@@ -210,39 +240,9 @@
               </div>
               <!-- Headline/Top News/Caraousel -->
 
-              <!-- Create news -->
+              <!-- eMail -->
             	<div class="news-tab-content">
-                <div class="panel">
-                  <div class="panel-heading"><h4>Create News</h4></div>
-                  <div class="panel-body">
-                    <div class="createNews">
-                      <div class="alert alert-success alert-dismissible success-process" style="display:none;" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <strong>Success!</strong> Your article has been successfully posted.
-                      </div>
-                      <div class="alert alert-danger alert-dismissible error-process" style="display:none;" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <strong>Error!</strong> Your article was not successfully posted.
-                      </div>
-                      <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" class="form-control" id="title" placeholder="Enter Title">
-                      </div>
-                      <div class="form-group">
-                        <label for="content">Article content</label>
-                        <textarea type="text" class="form-control textarea" id="content" placeholder="Article content" rows="10"></textarea>
-                      </div>
-                      <div class="form-group">
-                        <label for="image">Image File</label>
-                        <input type="file" id="file" name="image">
-                        <p class="help-block">Pleas choose a image type of jpeg, jpg and png.</p>
-                      </div>
-                      <input type="submit" class="btn btn-primary create-news" value="Submit">
-                    </div> <!-- //createNews -->
-                  </div>
-                </div>
-
-              </div> <!-- //end of create news -->
+              </div> <!-- //end of eMail -->
 
             </div> <!-- end of news tab -->
           </div>
@@ -285,7 +285,7 @@
             <textarea type="text" class="form-control edit-content" rows="10"></textarea>
             <div class="form-group">
               <label for="image">Image File</label>
-              <input type="file" id="editFile" name="photo" />
+              <input type="file" id="editFile" name="photo" multiple/>
               <p class="help-block">Pleas choose a image type of jpeg, jpg and png.</p>
             </div>
           </div>
@@ -298,6 +298,14 @@
     </div><!-- /.modal -->
 
   </div> <!-- end of wrapper -->
+	<div class="loader">
+		<div class="fa-spinner-loader">
+			<i class="fa fa-spinner fa-pulse fa-5x"></i>
+			<p class="text-center loader-message">
+				sending...
+			</p>
+		</div>
+	</div>
 
   <script src="/assets/js/wysihtml5.js"></script>
   <script src="/assets/js/jquery.js"></script>

@@ -25,6 +25,7 @@ $(document).ready(function(){
 		 	data: {id:$id}
 		 }).success(function(response){
 		 	var $data = response;
+			console.log(response);
 		 	//Read more data
 		 	var $d = new Date($data.date);
 			var $days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -50,8 +51,23 @@ $(document).ready(function(){
 		 	$('.title-content').html($data.title);
 		 	$('.content').html($data.content);
 		 	$('.displayName').html($data.displayName);
-		 	$('.imgPath').attr('src',$data.imagePath);
+		 	$('.imgPath').attr('src',$data.imagePath[0]);
+			var img = '<div class="clearfix">';
+			for( image in $data.imagePath){
+						img += '<div class="col-xs-3">';
+						img += '<div class="thumbnail">';
+						img += '<a href="#"><img class="img-responsive imgPath center-block" style="width:100%;" src="'+ $data.imagePath[image] +'" alt=""></a>';
+						img += '</div>';
+						img += '</div>';
+			}
+						img += '</div>';
+			$('.image-thumbnails').html(img);
 		 	$('.date').html($day + ', ' + $month + ' ' + $date + ', '+ $year + ' '+ $hours + ':' + $min + ' ' + $mid);
+
+			$(document).on('click', '.image-thumbnails img', function(){
+				var srcImg = $(this).attr('src');
+				$('.image-post').attr('src', srcImg);
+			});
 
 	 		var $postId = response._id;
 	 		$.ajax({
@@ -336,28 +352,11 @@ $(document).ready(function(){
 					var $content = $('.comment-bar').val();
 					if($content === ""){
 							alert("Please input something");
+							$('.btn-comment').prop('disabled', false).html('comment');
 							$('.comment-bar').focus();
 						}else{
 							if(!$token){
-								var $status = 'pending';
 								$('#modalAnonymous').modal('show');
-								$('.guest-name').focus();
-
-								$('.btn-guest').on('click', function(){
-									var $nickname = $('.guest-name').val();
-									if($nickname === ""){
-										alert("Invalid username!");
-									}else{
-										$.ajax({
-											url: 'https://hau-rappler.herokuapp.com/api/post/comment',
-											method: 'POST',
-											data: {postId: $postId, content: $content, status: $status, nickname: $nickname}
-										}).success(function(response){
-											alert("Your comment will be posted upon the approval of the admin!");
-										});
-									}
-									$('#modalAnonymous').modal('hide');
-								});
 							}else{
 								var $status = 'approved';
 								var $userId = $userInfo.data._id;
@@ -381,21 +380,66 @@ $(document).ready(function(){
 
 				$('.comment-bar').keypress( function(e){
 					if(e.keyCode === 13){
+						$('.btn-comment').prop('disabled', true).html('please wait...');
 						comment();
 						setTimeout( function(){
 							listComments();
-						}, 1000);
+						}, 100);
 
 					}
 				});
 
 				$('.btn-comment').on('click', function(){
-
+					$(this).prop('disabled', true).html('please wait...');
 					comment();
 					setTimeout( function(){
 						listComments();
-					}, 1000);
+					}, 100);
 				});
+
+
+				$('.btn-guest').on('click', function(){
+					var $status = 'pending';
+					var $nickname = $('.guest-name').val();
+					if($nickname === ""){
+						alert("Invalid username, your message will not be save!");
+					}else{
+						$.ajax({
+							url: 'https://hau-rappler.herokuapp.com/api/post/comment',
+							method: 'POST',
+							data: {postId: $postId, content: $content, status: $status, nickname: $nickname}
+						}).success(function(response){
+							alert("Your comment will be posted upon the approval of the admin!");
+							$('.comment-bar').val('');
+							$('.guest-name').val('');
+							$('.btn-comment').prop('disabled', false).html('comment');
+						});
+					}
+					$('#modalAnonymous').modal('hide');
+				});
+
+				$('.guest-name').keypress(function(e){
+					if(e.keyCode === 13){
+						var $status = 'pending';
+						var $nickname = $('.guest-name').val();
+						if($nickname === ""){
+							alert("Invalid username, your message will not be save!");
+						}else{
+							$.ajax({
+								url: 'https://hau-rappler.herokuapp.com/api/post/comment',
+								method: 'POST',
+								data: {postId: $postId, content: $content, status: $status, nickname: $nickname}
+							}).success(function(response){
+								alert("Thank you! Your comment will be posted upon the approval of by the admin!");
+								$('.comment-bar').val('');
+								$('.guest-name').val('');
+								$('.btn-comment').prop('disabled', false).html('comment');
+							});
+						}
+						$('#modalAnonymous').modal('hide');
+					}
+				});
+
 
 	 		});
 
