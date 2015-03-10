@@ -39,7 +39,7 @@
         <li class=""><a href="#">Posted News<span class="sub_icon fa fa-newspaper-o"></span></a></li>
         <li class=""><a href="#">Comments<span class="sub_icon fa fa-sign-in"></span></a></li>
         <li class="headline-tab"><a href="#">Headlines<span class="sub_icon fa fa-file-o"></span></a></li>
-        <li class=""><a href="#">Email<span class="sub_icon fa fa-envelope-o"></span></a></li>
+        <li class=""><a href="#" class="btn-message">Email<span class="sub_icon fa fa-envelope-o"></span></a></li>
       </ul>
     </div>
 
@@ -80,8 +80,8 @@
 											</div>
 											<div class="form-group">
 												<label for="image">Image File</label>
-												<input type="file" id="file" name="image" multiple>
-												<p class="help-block">Pleas choose a image type of jpeg, jpg and png.</p>
+												<input type="file" id="file" multiple>
+												<p class="help-block">Pleas choose image type of jpeg, jpg and png.</p>
 											</div>
 											<button type="submit" class="btn btn-primary create-news">Submit</button>
 										</div> <!-- //createNews -->
@@ -214,23 +214,17 @@
                          <ul class="headline">
                            <li></li>
                          </ul>
-                         <button class="btn btn-success btn-headline">Submit</button>
-                         <button class="btn btn-danger delete-headline">Delete</button>
                         </div>
 
                         <div class="tab-pane fade" id="tab2info">
                           <div class="topTen">
 
                           </div>
-                          <button class="btn btn-success btn-topTen">Submit</button>
-                          <button class="btn btn-danger delete-top-ten">Delete</button>
                         </div>
 
                         <div class="tab-pane fade" id="tab3info">
                           <div class="slidesTitle">
                           </div>
-                          <button class="btn btn-success btn-slides">Submit</button>
-                          <button class="btn btn-danger delete-carousel">Delete</button>
                         </div>
 
                       </div>
@@ -242,6 +236,14 @@
 
               <!-- eMail -->
             	<div class="news-tab-content">
+								<div class="panel">
+									<div class="panel-heading">
+										<h4>Inbox</h4>
+									</div>
+									<div class="panel-body client-inbox">
+
+									</div>
+								</div>
               </div> <!-- //end of eMail -->
 
             </div> <!-- end of news tab -->
@@ -296,6 +298,25 @@
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+
+		<div class="modal fade inbox-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg">
+				<div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		        <h4 class="modal-title msg-client"></h4>
+		      </div>
+		      <div class="modal-body">
+		      	<h4><strong class="msg-subject">No subject</strong></h4>
+						<small class="msg-email"></small>
+						<br>
+						<p class="msg-message">
+						</p>
+					</div>
+		    </div><!-- /.modal-content -->
+		  </div>
+		</div>
 
   </div> <!-- end of wrapper -->
 	<div class="loader">

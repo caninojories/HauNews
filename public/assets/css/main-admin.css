@@ -503,3 +503,10 @@ input[readonly] {
   color: #a94442;
   z-index: 999999;
 }
+
+
+.client-message {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -78,11 +78,13 @@ $.ajax({
     method: 'GET',
     data: {department: $department}
   }).success( function(response){
-    if(response[0]){
-			$('.top-10-news').removeClass('hidden');
+		if(response.length === 0){
+			$('.top-10-news').addClass('hidden');
+		}
+    if(response){
       var topTenArray = '<ul class"list-group">';
-      for(var topNews in response[0].postTopTen){
-          topTenArray += '<li class="list-group-item"><a href="/post/'+response[0].postTopTen[topNews].postId+'"> '+response[0].postTopTen[topNews].title+'</a></li>';
+      for(var topNews in response){
+          topTenArray += '<li class="list-group-item"><a href="/post/'+response[topNews].postId+'"> '+response[topNews].title+'</a></li>';
       }
           topTenArray += '</ul>';
       $('.top-ten-news').html(topTenArray);
@@ -97,7 +99,7 @@ $.ajax({
     data: {department: $department}
   }).success( function(response){
     if(response[0]){
-			$('#myCarouselDep').fadeIn().addClass('animated fadeIn');
+			$('#myCarouselDep').removeClass('hidden');
       var i = 0;
     	var e = 0;
       var $slideCarousel;
@@ -132,8 +134,6 @@ $.ajax({
 
       $('#myCarouselDep').append($slideCarousel);
       $('#myCarouselDep').append(counter);
-    }else{
-      $('#myCarouselDep').remove();
     }
 
   });

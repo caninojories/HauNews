@@ -8,7 +8,7 @@ $(document).ready( function(){
       data: {token: $token}
     }).success( function(response){
       if(response){
-        window.location ='/';
+        window.location ='/login';
       }
     }).error( function(response){
       console.log(response);

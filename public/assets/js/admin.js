@@ -8,9 +8,8 @@ $(document).ready(function(){
   });
 
   var objHeadline = [];
-  var objTopten = [];
-  var objSlides = [];
   var departmentData = 'null';
+
 	//Admin side bar
 	$("#menu-toggle").click(function() {
       $("#wrapper").toggleClass("active");
@@ -378,13 +377,11 @@ $(document).ready(function(){
                             $.ajax({
                               url: 'https://hau-rappler.herokuapp.com/api/post/sendSubscribe',
                               method: 'POST',
-                              data: {id: $id}
+                              data: {postId: $id}
                             }).success( function(response){
-                              console.log(response);
                               $('.btn-subscriber').prop('disabled', false).html('Send <i class="fa fa-envelope"></i>');
                               alert('Successfully sent news to subscriber\'s email.');
                             }).error( function(response){
-                              console.log(response);
                               $('.btn-subscriber').prop('disabled', false).html('Send <i class="fa fa-envelope"></i>');
                               alert('Error while sending news to subscriber\'s email.');
                             });
@@ -608,14 +605,20 @@ $('.typeahead').typeahead(null, {
           content: response.content
         });
 
-        $('ul.headline>li').html(objHeadline[0].title);
-        $('.btn-headline').on('click', function(){
+        $.ajax({
+          url: 'https://hau-rappler.herokuapp.com/api/post/headline',
+          method: 'POST',
+          data: {postId: objHeadline[0].postId, title: objHeadline[0].title, content: objHeadline[0].content, department: departmentData }
+        }).success( function(response){
           $.ajax({
             url: 'https://hau-rappler.herokuapp.com/api/post/headline',
-            method: 'POST',
-            data: {postId: objHeadline[0].postId, title: objHeadline[0].title, content: objHeadline[0].content, department: departmentData }
+            method: 'GET',
+            data: {department: $department}
           }).success( function(response){
-            objHeadline.push(response);
+            if(response){
+              $('ul.headline>li').html('<i class="fa fa-arrow-circle-right"></i> '+response.title +' <input type="hidden" value="'+response.postId+'"><button class="btn btn-danger btn-xs delete-headline">remove</button>');
+            }
+
           });
         });
       }
@@ -625,42 +628,51 @@ $('.typeahead').typeahead(null, {
 
   //================NEWS TOP 10=============
   if($navtab.eq(1).hasClass('active')){
-    if(objTopten.length >= 10){
-      alert('The Top 10 News should have only 10 articles, less or more than is not allowed.');
-    } else {
-      objTopten.push({
-        postId: response.id,
-        title: response.title,
+    if()
+    $.ajax({
+      url: 'https://hau-rappler.herokuapp.com/api/post/toptennews',
+      method: 'POST',
+      data: {postId: response.id, department: departmentData, title: response.title}
+    }).success( function(response){
+      $.ajax({
+        url: 'https://hau-rappler.herokuapp.com/api/post/toptennews',
+        method: 'GET',
+        data: {department: $department}
+      }).success( function(response){
+        if(response){
+          // booleanHeadline = true;
+          for(var topNews in response){
+            var topTenArray = '<li><i class="fa fa-arrow-circle-right"></i> '+response[topNews].title+' <input type="hidden" value="'+ response[topNews].postId +'"> <button class="btn btn-danger btn-xs delete-top-ten">remove</button></li>';
+          }
+          $('.topTen').append(topTenArray);
+        }
+
       });
-      for( var obj in objTopten ){
-        var topTen = '<li class="active"><i class="fa fa-arrow-circle-right"></i> '+objTopten[obj].title+' <button class="btn btn-xs btn-danger removeSplice">Remove</button></li>';
-      }
-
-      $('.topTen').append(topTen);
-    }
+    });
   }
-
-  $(document).on('click', '.removeSplice', function(e){
-    e.preventDefault();
-    var removeThis = $(this).parent('li.active').index();
-    objTopten.splice(0, removeThis);
-  });
 
   //============== News Slides ====================
   if($navtab.eq(2).hasClass('active')){
-    objSlides.push({
-      postId: response.id,
-      title: response.title,
-      imagePath: response.imagePath
+    $.ajax({
+      url: 'https://hau-rappler.herokuapp.com/api/post/carousel',
+      method: 'POST',
+      data: {postId: response.id, imagePath: response.imagePath, title: response.title, department: departmentData}
+    }).success( function(response){
+
+      $.ajax({
+        url: 'https://hau-rappler.herokuapp.com/api/post/carousel',
+        method: 'GET',
+        data: {department: $department}
+      }).success( function(response){
+        if(response){
+          for(var carousel in response){
+              slideCarousel = '<li><i class="fa fa-arrow-circle-right"></i> ' +response[carousel].title+ '<input type="hidden" value="'+response[carousel].postId+'"> <button class="btn btn-danger btn-xs delete-slide">remove</button></li>';
+          }
+          $('.carousel-slide-list').append(slideCarousel);
+        }
+      });
     });
-
-    for( var  slides in objSlides ){
-      var slidesTitle = '<li>'+ objSlides[slides].title +'</li>';
-    }
-
-    $('.slidesTitle').append(slidesTitle);
   }
-
   }); //end of typeahead
 
 
@@ -680,8 +692,7 @@ $('.typeahead').typeahead(null, {
       data: {department: $department}
     }).success( function(response){
       if(response){
-        booleanHeadline = true;
-        $('.headline>li').html('<i class="fa fa-arrow-circle-right"></i> '+response.title);
+        $('.headline>li').html('<i class="fa fa-arrow-circle-right"></i> '+response.title + ' <input type="hidden" value="'+response.id+'"><button class="btn btn-danger btn-xs delete-headline">remove</button>');
       }
 
     });
@@ -692,13 +703,16 @@ $('.typeahead').typeahead(null, {
       method: 'GET',
       data: {department: $department}
     }).success( function(response){
-      if(response[0]){
+      if(response){
         // booleanHeadline = true;
         var topTenArray = '<ul class="topNews">';
-        for(var topNews in response[0].postTopTen){
-            topTenArray += '<li><i class="fa fa-arrow-circle-right"></i> '+response[0].postTopTen[topNews].title+'</li>';
+        for(var topNews in response){
+            topTenArray += '<li><i class="fa fa-arrow-circle-right"></i> '+response[topNews].title+' <input type="hidden" value="'+ response[topNews].postId +'"> <button class="btn btn-danger btn-xs delete-top-ten">remove</button></li>';
         }
             topTenArray += '</ul>';
+        $('.topTen').html(topTenArray);
+      }else{
+        var topTenArray = '<ul class="topNews"></ul>';
         $('.topTen').html(topTenArray);
       }
 
@@ -710,13 +724,16 @@ $('.typeahead').typeahead(null, {
       method: 'GET',
       data: {department: $department}
     }).success( function(response){
-      if(response[0]){
+      if(response){
         // booleanHeadline = true;
         var slideCarousel = '<ul class="carousel-slide-list">';
-        for(var carousel in response[0].carousel){
-            slideCarousel += '<li><i class="fa fa-arrow-circle-right"></i> ' +response[0].carousel[carousel].title+'</li>';
+        for(var carousel in response){
+            slideCarousel += '<li><i class="fa fa-arrow-circle-right"></i> ' +response[carousel].title+ '<input type="hidden" value="'+response[carousel].postId+'"> <button class="btn btn-danger btn-xs delete-slide">remove</button></li>';
         }
             slideCarousel += '</ul>';
+        $('.slidesTitle').html(slideCarousel);
+      } else{
+        var slideCarousel = '<ul class="carousel-slide-list"></ul>';
         $('.slidesTitle').html(slideCarousel);
       }
 
@@ -729,37 +746,48 @@ $('.typeahead').typeahead(null, {
 
 
 //=================== Delete Headline ==================
-      $('.delete-headline').on('click', function(){
-          objHeadline.splice(0, 1);
-          $('.headline>li').html("");
-          $.ajax({
-            url: 'https://hau-rappler.herokuapp.com/api/post/headline',
-            method: 'DELETE',
-            data : {department: departmentData}
-          }).success( function(response){
-          });
+      $(document).on('click', '.delete-headline', function(){
+          var confirmDelete = confirm('Are you sure you want to remove this?');
+          if( confirmDelete === true){
+            $('.headline>li').html("");
+            objHeadline.splice(0, 1);
+            $.ajax({
+              url: 'https://hau-rappler.herokuapp.com/api/post/headline',
+              method: 'DELETE',
+              data : {department: departmentData}
+            }).success( function(response){
+            });
+          }
         });
 
 //=================== Delete TOP 10 ==================
-      $('.delete-top-ten').on('click', function(){
-          $('.topTen').html("");
-          $.ajax({
-            url: 'https://hau-rappler.herokuapp.com/api/post/toptennews',
-            method: 'DELETE',
-            data: {department: departmentData}
-          }).success( function(response){
-          });
+      $(document).on('click', '.delete-top-ten', function(){
+          var $postid = $(this).siblings('input').val();
+          var confirmDelete = confirm('Are you sure you want to remove this?');
+          if( confirmDelete === true){
+            $(this).parent('li').remove();
+            $.ajax({
+              url: 'https://hau-rappler.herokuapp.com/api/post/toptennews',
+              method: 'DELETE',
+              data: {postId: $postid, department: departmentData}
+            }).success( function(response){
+            });
+          }
         });
 
 //=================== Delete carousel ==================
-      $('.delete-carousel').on('click', function(){
-          $('.slidesTitle').html('');
-          $.ajax({
-            url: 'https://hau-rappler.herokuapp.com/api/post/carousel',
-            method: 'DELETE',
-            data: {department: departmentData}
-          }).success( function(response){
-          });
+      $(document).on('click', '.delete-slide', function(){
+          var $postid = $(this).siblings('input').val();
+          var confirmDelete = confirm('Are you sure you want to remove this?');
+          if( confirmDelete === true){
+            $(this).parent('li').remove();
+            $.ajax({
+              url: 'https://hau-rappler.herokuapp.com/api/post/carousel',
+              method: 'DELETE',
+              data: {postId: $postid, department: departmentData}
+            }).success( function(response){
+            });
+          }
         });
 
 
@@ -878,7 +906,6 @@ $('.typeahead').typeahead(null, {
             data: {tag: $tag, title:$aboutTitle, content:$aboutContent}
         }).success( function(response){
           $('.btn-aboutUs').prop('disabled', false).html('Submit');
-          console.log(response);
           $('.aboutUs-post input').val('');
           $('.aboutUs-post textarea').val('');
           $('.aboutUs-post .success-process').fadeIn('fast').delay(3001).fadeOut('slow');
@@ -922,21 +949,23 @@ $('.typeahead').typeahead(null, {
       url: 'https://hau-rappler.herokuapp.com/api/contact',
       method: 'GET'
     }).success( function(response){
+      var $id = response._id;
+
       if(response){
+        $('.contactUs-post #contactUs-street').val(response.street);
+        $('.contactUs-post #contactUs-brgy').val(response.barangay);
+        $('.contactUs-post #contactUs-city').val(response.city);
+        $('.contactUs-post #contactUs-prov').val(response.province);
+        $('.contactUs-post #contactUs-contact').val(response.contact);
+        $('.contactUs-post #contactUs-content').val(response.content);
+
         $('.btn-contactUs').on('click', function(){
             $(this).prop('disabled', true).html('Submiting...');
-
-            var $st = $('.contactUs-post #contactUs-street').val();
-            var $brgy = $('.contactUs-post #contactUs-brgy').val();
-            var $city = $('.contactUs-post #contactUs-city').val();
-            var $prov = $('.contactUs-post #contactUs-prov').val();
-            var $contact = $('.contactUs-post #contactUs-contac').val();
-            var $content = $('.contactUs-post #contactUs-content').val();
 
             $.ajax({
                 url: "https://hau-rappler.herokuapp.com/api/contact",
                 method: "PUT",
-                data: {street: $st, barangay:$brgy, city:$city, province:$prov, contact:$contact, content:$content}
+                data: {id: $id}
             }).success( function(response){
               $('.contactUs-post input').val('');
               $('.contactUs-post .textarea').val('');
@@ -950,7 +979,6 @@ $('.typeahead').typeahead(null, {
             });
         });
       } else {
-        $('.contactUs-post #contactUs-content').addClass('textarea');
         $('.btn-contactUs').on('click', function(){
             $(this).prop('disabled', true).html('Submitting...');
 
@@ -978,6 +1006,38 @@ $('.typeahead').typeahead(null, {
       }
 
     });
+
+    $('.btn-message').on('click', function(){
+      $.ajax({
+    		url: 'https://hau-rappler.herokuapp.com/api/contactus',
+    		method: 'GET'
+    	}).success( function(response){
+    		if(response){
+          var msg = '<div class="list-group">';
+          for(var msge in response){
+              msg += '<a href="#" class="list-group-item" data-toggle="modal" data-target=".inbox-modal">';
+              msg += '<h4 class="list-group-item-heading client"><small><span>'+ response[msge].firstName +'</span> <span>'+ response[msge].lastName +'</span></small></h4>';
+              msg += '<p class="list-group-item-text client-email"><small>'+ response[msge].email +'</small></p>';
+              msg += '<p class="list-group-item-text client-subject"><small>'+ response[msge].subject +'</small></p>';
+              msg += '<p class="list-group-item-text client-message"><small>'+ response[msge].message +'</small></p>';
+              msg += '</a>';
+          }
+              msg += '</div>';
+        }
+        $('.client-inbox').html(msg);
+        $(document).on('click', '.list-group-item', function(){
+          var clientName = $(this).children('.client').html();
+          var clientEmail = $(this).children('.client-email').children('small').html();
+          var clientSubject = $(this).children('.client-subject').children('small').html();
+          var clientMessage = $(this).children('.client-message').children('small').html();
+          $('.inbox-modal .msg-client').html(clientName);
+          $('.inbox-modal .msg-subject').html(clientSubject);
+          $('.inbox-modal .msg-email').html(clientEmail);
+          $('.inbox-modal .msg-message').html(clientMessage);
+        });
+    	});
+    });
+
 
 
 });

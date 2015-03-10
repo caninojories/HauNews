@@ -85,11 +85,4 @@ $(document).ready(function(){
 		contactUs();
 	});
 
-	$.ajax({
-		url: 'https://hau-rappler.herokuapp.com/api/contactus',
-		method: 'GET'
-	}).success( function(response){
-		console.log(response);
-	});
-
 });
