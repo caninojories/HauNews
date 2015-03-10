@@ -549,7 +549,7 @@ $.ajax({
                     title: department.title,
                     id: department._id,
                     content: department.content,
-                    imagePath: department.imagePath,
+                    imagePath: department.imagePath[0],
                     department: department.department
                 };
             });
@@ -571,7 +571,7 @@ $.ajax({
                     title: department.title,
                     id: department._id,
                     content: department.content,
-                    imagePath: department.imagePath,
+                    imagePath: department.imagePath[0],
                     department: department.department
                 };
             });
@@ -789,36 +789,6 @@ $('.typeahead').typeahead(null, {
           }
         });
 
-
-
-
-//=================== TOP 10 POST ==================
-      $('.btn-topTen').on('click', function(){
-        var topTenObj = JSON.stringify(objTopten);
-        if(objTopten.length === 10 ){
-          $.ajax({
-            url: 'https://hau-rappler.herokuapp.com/api/post/toptennews',
-            method: 'POST',
-            data: {data: topTenObj, department: departmentData},
-            // contentType: 'application/json',
-          }).success( function(response){
-          });
-        } else {
-          alert("Less or more than 10 articles are not allowed.");
-        }
-      });
-
-//=================== slides ==================
-      $('.btn-slides').on('click', function(){
-        var slidesObj = JSON.stringify(objSlides);
-        $.ajax({
-          url: 'https://hau-rappler.herokuapp.com/api/post/carousel',
-          method: 'POST',
-          data: {data: slidesObj, department: departmentData}
-          // contentType: 'application/json',
-        }).success( function(response){
-        });
-      });
 
 
 

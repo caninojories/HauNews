@@ -325,7 +325,6 @@ var $department = 'null';
       		$slideCarousel = '<div class="carousel-inner">';
       for(var carousel in response){
 				if(window.location.pathname === '/') {
-					for(var carousel in response){
 						if(response[carousel].department === 'null'){
 							$('#myCarousel').removeClass('hidden');
 							if(i++ === 0){
@@ -333,7 +332,7 @@ var $department = 'null';
 			      	}else{
 			      		$slideCarousel += '<div class="item">';
 			      	}
-			      		$slideCarousel += '<img class="img-responsive" src="' +response[carousel].imagePath[0]+ '" alt="">';
+			      		$slideCarousel += '<img class="img-responsive" src="' +response[carousel].imagePath+ '" alt="">';
 			      		$slideCarousel += '<div class="container-fluid">';
 			      		$slideCarousel += '<div class="carousel-caption">';
 			      		$slideCarousel += '<h3 class="carousel-title">' +response[carousel].title+ ' </h3>';
@@ -343,9 +342,10 @@ var $department = 'null';
 			      		$slideCarousel += '</div>';
 			      		$slideCarousel += '</div>';
 			      }
-			      		$slideCarousel += '</div>';
-
-
+					}
+				}
+					$slideCarousel += '</div>';
+					if(window.location.pathname === '/') {
 			      var counter = '<ol class="carousel-indicators">';
 
 			     	for(var icounter in response){
@@ -356,9 +356,7 @@ var $department = 'null';
 			     		}
 			     	}
 			     			counter +='</ol>';
-						}
 					}
-				}
 
       $('#myCarousel').append($slideCarousel);
       $('#myCarousel').append(counter);

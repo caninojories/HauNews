@@ -116,7 +116,7 @@ $.ajax({
       	}else{
       		$slideCarousel += '<div class="item">';
       	}
-      		$slideCarousel += '<img class="img-responsive" src="' +response[carousel].imagePath[0]+ '" alt="">';
+      		$slideCarousel += '<img class="img-responsive" src="' +response[carousel].imagePath+ '" alt="">';
       		$slideCarousel += '<div class="container-fluid">';
       		$slideCarousel += '<div class="carousel-caption">';
       		$slideCarousel += '<h3 class="carousel-title">' +response[carousel].title+ ' </h3>';
@@ -129,13 +129,14 @@ $.ajax({
       		$slideCarousel += '</div>';
 
       var counter = '<ol class="carousel-indicators">';
-      for(var icounter in response){
-        if(i++ === 0){
-          counter +='<li data-target="#myCarousel" data-slide-to="'+ e++ +'" class="active"></li>';
+      for(icounter in response){
+        if(icounter === 0){
+          counter +='<li data-target="#myCarousel" data-slide-to="'+ icounter +'" class="active"></li>';
         }else{
-          counter +='<li data-target="#myCarousel" data-slide-to="'+ e++ +'" class=""></li>';
+          counter +='<li data-target="#myCarousel" data-slide-to="'+ icounter +'" class=""></li>';
         }
       }
+				counter += '</ol>';
 
       $('#myCarousel').append($slideCarousel);
       $('#myCarousel').append(counter);
