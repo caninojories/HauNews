@@ -390,6 +390,7 @@ var $department = 'null';
   $('.btn-subscribe').click( function(){
   	$('.btn-subscribe').prop('disabled', true).html('sending...');
   	$('.loading-email').removeClass('hidden');
+		$('.email-sent').addClass('hidden');
   	var subscribe = $('.subscribe-email').val();
   	var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   	if(subscribe === '' || !filter.test(subscribe)){
@@ -425,6 +426,7 @@ var $department = 'null';
 		if(e.keyCode === 13){
 	  	$('.btn-subscribe').prop('disabled', true).html('sending...');
 	  	$('.loading-email').removeClass('hidden');
+			$('.email-sent').addClass('hidden');
 	  	var subscribe = $('.subscribe-email').val();
 	  	var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	  	if(subscribe === '' || !filter.test(subscribe)){
