@@ -317,42 +317,48 @@ var $department = 'null';
     method: 'GET',
     data: {department: $department}
   }).success( function(response){
-    if(response[0]){
+    if(response){
     	$('#myCarousel').removeClass('hidden');
     	var i = 0;
     	var e = 0;
       var $slideCarousel;
       		$slideCarousel = '<div class="carousel-inner">';
-      for(var carousel in response[0].carousel){
+      for(var carousel in response){
+				if(window.location.pathname === '/') {
+					for(var carousel in response){
+						if(response[carousel].department === 'null'){
+							$('#myCarousel').removeClass('hidden');
+							if(i++ === 0){
+			      		$slideCarousel += '<div class="item active">';
+			      	}else{
+			      		$slideCarousel += '<div class="item">';
+			      	}
+			      		$slideCarousel += '<img class="img-responsive" src="' +response[carousel].imagePath[0]+ '" alt="">';
+			      		$slideCarousel += '<div class="container-fluid">';
+			      		$slideCarousel += '<div class="carousel-caption">';
+			      		$slideCarousel += '<h3 class="carousel-title">' +response[carousel].title+ ' </h3>';
+			      		$slideCarousel += '<hr>';
+			      		$slideCarousel += '<a class="btn btn-large btn-btn" href="/post/'+response[carousel].postId+'">Read more</a>';
+			      		$slideCarousel += '</div>';
+			      		$slideCarousel += '</div>';
+			      		$slideCarousel += '</div>';
+			      }
+			      		$slideCarousel += '</div>';
 
-      	if(i++ === 0){
-      		$slideCarousel += '<div class="item active">';
-      	}else{
-      		$slideCarousel += '<div class="item">';
-      	}
-      		$slideCarousel += '<img class="img-responsive" src="' +response[0].carousel[carousel].imagePath[0]+ '" alt="">';
-      		$slideCarousel += '<div class="container-fluid">';
-      		$slideCarousel += '<div class="carousel-caption">';
-      		$slideCarousel += '<h3 class="carousel-title">' +response[0].carousel[carousel].title+ ' </h3>';
-      		$slideCarousel += '<hr>';
-      		$slideCarousel += '<a class="btn btn-large btn-btn" href="/post/'+response[0].carousel[carousel].postId+'">Read more</a>';
-      		$slideCarousel += '</div>';
-      		$slideCarousel += '</div>';
-      		$slideCarousel += '</div>';
-      }
-      		$slideCarousel += '</div>';
 
+			      var counter = '<ol class="carousel-indicators">';
 
-      var counter = '<ol class="carousel-indicators">';
-
-     	for(var icounter in response[0].carousel){
-     		if(i++ === 0){
-     			counter +='<li data-target="#myCarousel" data-slide-to="'+ e++ +'" class="active"></li>';
-     		}else{
-     			counter +='<li data-target="#myCarousel" data-slide-to="'+ e++ +'" class=""></li>';
-     		}
-     	}
-     			counter +='</ol>';
+			     	for(var icounter in response){
+			     		if(i++ === 0){
+			     			counter +='<li data-target="#myCarousel" data-slide-to="'+ e++ +'" class="active"></li>';
+			     		}else{
+			     			counter +='<li data-target="#myCarousel" data-slide-to="'+ e++ +'" class=""></li>';
+			     		}
+			     	}
+			     			counter +='</ol>';
+						}
+					}
+				}
 
       $('#myCarousel').append($slideCarousel);
       $('#myCarousel').append(counter);

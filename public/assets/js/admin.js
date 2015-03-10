@@ -628,7 +628,6 @@ $('.typeahead').typeahead(null, {
 
   //================NEWS TOP 10=============
   if($navtab.eq(1).hasClass('active')){
-    if()
     $.ajax({
       url: 'https://hau-rappler.herokuapp.com/api/post/toptennews',
       method: 'POST',

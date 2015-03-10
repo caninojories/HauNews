@@ -61,8 +61,6 @@ $.ajax({
   }).success( function(response){
     if(response){
 			$('.dep-headline').removeClass('hidden');
-      ('.department-headline').addClass('animated bounceInRight').show();
-      booleanHeadline = true;
       $('.headline-title').html(response.title);
       if(response.content.length > 300){
       	$('.headline-content').html(response.content.substr(0, 300)+'...');
@@ -80,6 +78,8 @@ $.ajax({
   }).success( function(response){
 		if(response.length === 0){
 			$('.top-10-news').addClass('hidden');
+		}else{
+			$('.top-10-news').removeClass('hidden');
 		}
     if(response){
       var topTenArray = '<ul class"list-group">';
@@ -98,25 +98,30 @@ $.ajax({
     method: 'GET',
     data: {department: $department}
   }).success( function(response){
-    if(response[0]){
-			$('#myCarouselDep').removeClass('hidden');
+		console.log(response);
+		if(response.length === 0){
+			$('#myCarousel').addClass('hidden');
+		} else{
+			$('#myCarousel').removeClass('hidden');
+		}
+    if(response){
       var i = 0;
     	var e = 0;
       var $slideCarousel;
       		$slideCarousel = '<div class="carousel-inner">';
-      for(var carousel in response[0].carousel){
+      for(var carousel in response){
 
       	if(i++ === 0){
       		$slideCarousel += '<div class="item active">';
       	}else{
       		$slideCarousel += '<div class="item">';
       	}
-      		$slideCarousel += '<img class="img-responsive" src="https://hau-rappler.herokuapp.com/uploads/' +response[0].carousel[carousel].imagePath[0]+ '" alt="">';
+      		$slideCarousel += '<img class="img-responsive" src="' +response[carousel].imagePath[0]+ '" alt="">';
       		$slideCarousel += '<div class="container-fluid">';
       		$slideCarousel += '<div class="carousel-caption">';
-      		$slideCarousel += '<h3 class="carousel-title">' +response[0].carousel[carousel].title+ ' </h3>';
+      		$slideCarousel += '<h3 class="carousel-title">' +response[carousel].title+ ' </h3>';
       		$slideCarousel += '<hr>';
-      		$slideCarousel += '<a class="btn btn-large btn-btn" href="/post/'+response[0].carousel[carousel].postId+'">Read more</a>';
+      		$slideCarousel += '<a class="btn btn-large btn-btn" href="/post/'+response[carousel].postId+'">Read more</a>';
       		$slideCarousel += '</div>';
       		$slideCarousel += '</div>';
       		$slideCarousel += '</div>';
@@ -124,7 +129,7 @@ $.ajax({
       		$slideCarousel += '</div>';
 
       var counter = '<ol class="carousel-indicators">';
-      for(var icounter in response[0].carousel){
+      for(var icounter in response){
         if(i++ === 0){
           counter +='<li data-target="#myCarousel" data-slide-to="'+ e++ +'" class="active"></li>';
         }else{
@@ -132,8 +137,8 @@ $.ajax({
         }
       }
 
-      $('#myCarouselDep').append($slideCarousel);
-      $('#myCarouselDep').append(counter);
+      $('#myCarousel').append($slideCarousel);
+      $('#myCarousel').append(counter);
     }
 
   });
