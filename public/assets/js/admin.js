@@ -918,7 +918,6 @@ $('.typeahead').typeahead(null, {
       url: 'https://hau-rappler.herokuapp.com/api/contact',
       method: 'GET'
     }).success( function(response){
-      var $id = response._id;
 
       if(response){
         $('.contactUs-post #contactUs-street').val(response.street);
@@ -929,22 +928,29 @@ $('.typeahead').typeahead(null, {
         $('.contactUs-post #contactUs-content').val(response.content);
 
         $('.btn-contactUs').on('click', function(){
+            var $st = $('.contactUs-post #contactUs-street').val();
+            var $brgy = $('.contactUs-post #contactUs-brgy').val();
+            var $city = $('.contactUs-post #contactUs-city').val();
+            var $prov = $('.contactUs-post #contactUs-prov').val();
+            var $contact = $('.contactUs-post #contactUs-contact').val();
+            var $content = $('.contactUs-post #contactUs-content').val();
+            var $id = response._id;
             $(this).prop('disabled', true).html('Submiting...');
 
             $.ajax({
                 url: "https://hau-rappler.herokuapp.com/api/contact",
                 method: "PUT",
-                data: {id: $id}
+                data: {id: $id, street: $st, barangay:$brgy, city:$city, province:$prov, contact:$contact, content:$content}
             }).success( function(response){
-              $('.contactUs-post input').val('');
-              $('.contactUs-post .textarea').val('');
-              $('.aboutUs-post .success-process').fadeIn('fast').delay(3001).fadeOut('slow');
+              $('.contactUs-post .success-process').fadeIn('fast').delay(3001).fadeOut('slow');
               $('.btn-contactUs').prop('disabled', false).html('Submit');
+              $('.contactUs-post input').val('');
+              $('.contactUs-post textarea').val('');
             }).error( function(response){
               $('.btn-contactUs').prop('disabled', false).html('Submit');
               $('.contactUs-post .error-process').fadeIn('fast').delay(3001).fadeOut('slow');
               $('.contactUs-post input').val('');
-              $('.contactUs-post .textarea').val('');
+              $('.contactUs-post textarea').val('');
             });
         });
       } else {
@@ -963,12 +969,14 @@ $('.typeahead').typeahead(null, {
                 data: {street: $st, barangay:$brgy, city:$city, province:$prov, contact:$contact, content:$content}
             }).success( function(response){
               $('.contactUs-post input').val('');
-              $('.contactUs-post .textarea').val('');
+              $('.contactUs-post textarea').val('');
               $('.contactUs-post .success-process').fadeIn('fast').delay(3001).fadeOut('slow');
               $('.btn-contactUs').prop('disabled', false).html('Submit');
             }).error( function(response){
               $('.btn-contactUs').prop('disabled', false).html('Submit');
               $('.contactUs-post .error-process').fadeIn('fast').delay(3001).fadeOut('slow');
+              $('.contactUs-post input').val('');
+              $('.contactUs-post textarea').val('');
             });
         });
 

@@ -259,6 +259,7 @@ li.logout {
 .container-wrapper {
   margin-top: 20px;
   background-color: #fff;
+  box-shadow: 1px 1px 5px #ccc;
 }
 
 .heading-news .jumbotron {
@@ -634,6 +635,7 @@ li.logout {
 #bis-wrapper .item.active .carousel-caption .carousel-title {
   margin-top: 100px;
   opacity: 1;
+  text-shadow: 1px 1px 5px #000;
 }
 
 #bis-wrapper .item .carousel-caption p {
@@ -1110,6 +1112,7 @@ footer img.hau{
 /*============End==============*/
 
 .mood-meter-view {
+  margin-top: 20px;
   background-image: url('../img/bg-1.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
