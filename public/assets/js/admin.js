@@ -863,16 +863,18 @@ $('.typeahead').typeahead(null, {
       $('.aboutUs-post #aboutUs-content').val(response.content);
 
       $('.btn-aboutUs').on('click', function(){
+        var
         $(this).prop('disabled', true).html('Submitting...');
 
         var $tag = $('.aboutUs-post #aboutUs-tag').val(response.tag);
         var $aboutTitle = $('.aboutUs-post #aboutUs-title').val(response.title);
         var $aboutContent = $('.aboutUs-post #aboutUs-content').val(response.content);
+        var $id = response._id;
 
         $.ajax({
             url: "https://hau-rappler.herokuapp.com/api/aboutUs",
             method: "PUT",
-            data: {tag: $tag, title:$aboutTitle, content:$aboutContent}
+            data: {id: $id, tag: $tag, title:$aboutTitle, content:$aboutContent}
         }).success( function(response){
           $('.btn-aboutUs').prop('disabled', false).html('Submit');
           $('.aboutUs-post input').val('');
@@ -889,7 +891,6 @@ $('.typeahead').typeahead(null, {
 
       $('.btn-aboutUs').on('click', function(){
         $(this).prop('disabled', true).html('Submiting...');
-
         var $tag = $('.aboutUs-post #aboutUs-tag').val();
         var $aboutTitle = $('.aboutUs-post #aboutUs-title').val();
         var $aboutContent = $('.aboutUs-post #aboutUs-content').val();
