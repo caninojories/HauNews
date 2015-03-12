@@ -863,7 +863,6 @@ $('.typeahead').typeahead(null, {
       $('.aboutUs-post #aboutUs-content').val(response.content);
 
       $('.btn-aboutUs').on('click', function(){
-        var
         $(this).prop('disabled', true).html('Submitting...');
 
         var $tag = $('.aboutUs-post #aboutUs-tag').val(response.tag);
